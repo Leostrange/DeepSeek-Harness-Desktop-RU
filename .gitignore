@@ -1,0 +1,37 @@
+# Build output
+bin/
+obj/
+publish/
+artifacts/
+
+# Local runtime / bundled dependencies
+node_modules/
+dsh-bundle/
+runtime/
+
+# User data and logs
+*.log
+data/
+logs/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Release binaries
+*.exe
+*.msi
+*.zip
+*.7z
+*.pfx
+
+# Keep public certificate if intentionally published
+!DeepSeekHarness-CodeSigning.cer
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
