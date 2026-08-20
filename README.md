@@ -1,140 +1,136 @@
+<div align="center">
+
 # DeepSeek Harness Desktop RU
 
-> DeepSeek Harness as a Windows desktop application — with Russian UI out of the box.
+### Windows-клиент DeepSeek Harness с полноценной русской локализацией
 
-[![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4)](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU)
-[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek-Harness-4D6BFE)](https://github.com/deepseek-ai/deepseek-harness)
-[![Language](https://img.shields.io/badge/UI-Русский-2ea44f)](#русская-локализация)
-[![dsh-plugin](https://img.shields.io/badge/topic-dsh--plugin-black)](https://github.com/topics/dsh-plugin)
+<p>
+  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0"><img src="https://img.shields.io/github/v/release/Leostrange/DeepSeek-Harness-Desktop-RU?style=for-the-badge&label=Релиз&color=4c6fff" alt="Последний релиз"></a>
+  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases"><img src="https://img.shields.io/github/downloads/Leostrange/DeepSeek-Harness-Desktop-RU/total?style=for-the-badge&label=Загрузки&color=16a085" alt="Загрузки"></a>
+  <img src="https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows 10/11">
+</p>
 
-**Нативное окно Windows · автоматическое подключение к локальному Harness · русский интерфейс · компактный установщик**
+<p>
+  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0"><strong>Скачать релиз</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#быстрый-старт">Быстрый старт</a>
+  &nbsp;·&nbsp;
+  <a href="#видеодемонстрация">Смотреть видео</a>
+</p>
 
----
+<br>
+
+<a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0"><img src="./media/deepseek-harness-chat.jpg" alt="DeepSeek Harness Desktop RU — рабочее окно с русской локализацией" width="900"></a>
+
+</div>
 
 ## О проекте
 
-Официальный **DeepSeek Harness** по умолчанию открывает Web UI в браузере. **DeepSeek Harness Desktop RU** превращает его в привычное Windows-приложение: запускает/подключается к локальному Harness на `http://127.0.0.1:3080`, показывает оригинальный интерфейс DSH в отдельном desktop-окне и добавляет полноценную русскую локализацию.
+**DeepSeek Harness Desktop RU** — первый публичный Windows-релиз клиента для DeepSeek Harness с русской локализацией интерфейса. Приложение упаковывает локальный Harness в удобный desktop-сценарий: установщик сам подготавливает окружение, запускает локальный сервис и открывает интерфейс на `127.0.0.1:3080`.
 
-Это не отдельный DeepSeek-чат и не замена Harness. В приложении остаются штатные рабочие области, сессии, модели, плагины, пресеты агентов, разрешения и настройки DeepSeek Harness.
+Проект рассчитан на запуск «скачал и работай»: пользователю не требуется вручную настраивать Node.js, pnpm или отдельный сервер Harness.
 
-> [!NOTE]
-> Независимый community-проект. Не является официальным продуктом DeepSeek.
+> **Независимый community-проект.** Не является официальным продуктом DeepSeek и не аффилирован с DeepSeek.
 
 ## Возможности
 
-| | Возможность |
-|---|---|
-| 🪟 | DeepSeek Harness в отдельном Windows-окне вместо вкладки браузера |
-| 🔌 | Автоматическое подключение к локальному `127.0.0.1:3080` |
-| 🇷🇺 | Полноценный русский интерфейс непосредственно внутри Harness |
-| 🌐 | `中文 / English / Русский` в штатном переключателе языка |
-| 📦 | Компактный Windows installer и готовая desktop-сборка |
-| 🧩 | Все основные возможности оригинального Harness остаются доступны |
-| 💾 | Локальная работа Harness и сохранение пользовательских данных |
+| Возможность | Описание |
+| --- | --- |
+| **Локальный запуск** | Подключение к Harness на `127.0.0.1:3080` без внешнего сервера. |
+| **Русская локализация** | Основные элементы интерфейса Harness переведены на русский язык. |
+| **Автоматическая подготовка среды** | Установщик проверяет наличие Node.js и при необходимости устанавливает его автоматически. |
+| **Windows installer** | Рекомендуемый способ установки через `DeepSeekHarness-Setup.exe`. |
+| **Portable-сборка** | Запуск из распакованной папки без классической установки. |
+| **Native-пакет** | Отдельная native-сборка для соответствующего сценария запуска. |
+| **Проверка подписи** | В комплект входит сертификат `DeepSeekHarness-CodeSigning.cer`. |
+| **Оригинальный Harness** | Сохраняются основные рабочие области, сессии, модели, плагины, пресеты и настройки. |
 
-## Скриншоты
+## Быстрый старт
 
-### Desktop-клиент
+1. Откройте страницу [релиза v1.0.0](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0).
+2. Скачайте `DeepSeekHarness-Setup.exe` из блока **Assets**.
+3. Запустите установщик и следуйте шагам мастера.
+4. После подготовки окружения клиент запустит локальный Harness и подключится к `http://127.0.0.1:3080`.
 
-![DeepSeek Harness Desktop RU](docs/media/harness-desktop-ru.jpg)
+> **Важно:** если Node.js отсутствует в системе, установщик обнаружит это и автоматически установит необходимую среду. Именно этот сценарий показан в видеодемонстрации ниже на чистой Windows-песочнице.
 
-### Русский язык в настройках
+## Файлы релиза
 
-![Русский язык DeepSeek Harness](docs/media/harness-language-ru.jpg)
+| Файл | Назначение |
+| --- | --- |
+| [`DeepSeekHarness-Setup.exe`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.0.0/DeepSeekHarness-Setup.exe) | Рекомендуемый установщик Windows-клиента. |
+| [`DeepSeekHarness-Distribution.zip`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.0.0/DeepSeekHarness-Distribution.zip) | Готовая distribution/portable-сборка. |
+| [`DeepSeekHarness-Native.zip`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.0.0/DeepSeekHarness-Native.zip) | Отдельная native-сборка. |
+| [`DeepSeekHarness-CodeSigning.cer`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.0.0/DeepSeekHarness-CodeSigning.cer) | Сертификат для проверки подписи. |
 
-Русский добавлен именно в интерфейс Harness, а не только в оболочку Windows-клиента.
+## Интерфейс
 
-## Видео установки
+В приложении сохраняется привычный рабочий процесс Harness, а основные настройки и язык доступны прямо внутри desktop-оболочки.
 
-Полная демонстрация установки и первого запуска будет доступна в `docs/media/installation-demo.mp4`.
+<div align="center">
 
-## Установка
+<img src="./media/deepseek-harness-settings.jpg" alt="Настройки DeepSeek Harness Desktop RU с выбором русского языка" width="820">
 
-1. Скачайте `DeepSeekHarness-Setup.exe` из **Releases**.
-2. Запустите установщик.
-3. После установки откройте **DeepSeek Harness** как обычное Windows-приложение.
-4. Клиент подключится к локальному экземпляру Harness на `127.0.0.1:3080`.
-5. Откройте **Настройки → Модели** и настройте нужного провайдера/API-ключ.
-6. Русский язык доступен в **Настройки → Язык → Русский**.
+<sub>Настройки приложения: язык, права, модели, плагины и оформление.</sub>
 
-> Готовые крупные бинарные файлы распространяются через GitHub Releases, а не хранятся в Git history.
+</div>
 
-## Русская локализация
+## Видеодемонстрация
 
-Локализация охватывает основной интерфейс DeepSeek Harness: навигацию, настройки, модели, плагины, пресеты агентов, разрешения, элементы сессий и другие пользовательские строки.
+Ниже — демонстрация установки в **чистой Windows-песочнице**, где Node.js заранее не установлен. Видео показывает полный сценарий: запуск инсталлятора, автоматическое обнаружение отсутствующей среды, установку Node.js и последующий запуск локального DeepSeek Harness.
 
-Главное отличие проекта — русский является полноценным вариантом языка внутри самого Harness:
+<div align="center">
+
+<a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/blob/main/media/deepseek-harness-install-demo.mp4">
+  <img src="./media/deepseek-harness-chat.jpg" alt="Открыть видеодемонстрацию установки DeepSeek Harness Desktop RU" width="760">
+  <br>
+  <strong>▶ Открыть и посмотреть видеодемонстрацию установки</strong>
+</a>
+
+</div>
+
+## Проверка целостности
+
+При необходимости сверяйте SHA-256 загруженных файлов:
 
 ```text
-中文   English   Русский
+ee93e434437ad301f9cb23c0f4080b952b578c3e3172a0b2b77cfd53c3a6d17d  DeepSeekHarness-Setup.exe
+e9f3b7c0b7cb9225601227ea8725e79b72851befe692248566e8ff9e88591b2e  DeepSeekHarness-Distribution.zip
+f454bae87e09790f7a444d3e5066c284d660247e527485c5dfa3e2e19da0efa4  DeepSeekHarness-Native.zip
+73468508aba59723b2d8e054dc75e70b7c6ccef762b9a278832a955bd8705a19  DeepSeekHarness-CodeSigning.cer
 ```
 
-## Как это работает
+## Статус проекта
 
-```text
-┌──────────────────────────────┐
-│ DeepSeek Harness Desktop RU  │
-│       Windows Client         │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│      Local Harness UI        │
-│   http://127.0.0.1:3080      │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│      DeepSeek Harness        │
-│   + Russian localization     │
-└──────────────────────────────┘
-```
+Это первый публичный релиз проекта. Перед использованием в рабочей среде рекомендуется проверить подпись, SHA-256-хэши и совместимость с целевой версией Windows.
 
-Desktop-клиент не пытается заново реализовать функции Harness. Он предоставляет отдельное Windows-окно для локального Web UI и автоматизирует обычный browser-based сценарий запуска.
+<div align="center">
 
-## Требования
+**[Скачать DeepSeek Harness Desktop RU v1.0.0](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0)**
 
-- Windows 10/11 x64;
-- локальный DeepSeek Harness/runtime, поставляемый соответствующей сборкой;
-- интернет требуется для API-провайдеров и операций, которым он нужен самому Harness.
-
-## Безопасность
-
-Проект не должен содержать пользовательские API-ключи. Credentials настраиваются через штатный интерфейс DeepSeek Harness. Не публикуйте каталоги пользовательских данных или конфигурации, содержащие секреты.
-
-## Upstream
-
-Официальный проект: [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)
-
-Экосистема плагинов: [GitHub topic: dsh-plugin](https://github.com/topics/dsh-plugin)
-
-DeepSeek, DeepSeek Harness и связанные названия принадлежат их соответствующим владельцам. Этот проект не заявляет официальной аффилиации с DeepSeek.
+</div>
 
 ---
 
 ## English
 
-**DeepSeek Harness Desktop RU** is an independent Windows desktop distribution for the official DeepSeek Harness with built-in Russian UI localization.
+**DeepSeek Harness Desktop RU** is an independent Windows desktop distribution for DeepSeek Harness with built-in Russian UI localization.
 
-Instead of using Harness in a regular browser tab, the client connects to the local Harness Web UI at `127.0.0.1:3080` and presents it as a standalone Windows application. Russian is integrated directly into the Harness language selector alongside Chinese and English.
+The installer prepares the local runtime automatically. If Node.js is not installed, it detects the missing dependency, installs the required Node.js environment, and then launches the local Harness at `127.0.0.1:3080`. The video demonstration shows this flow in a clean Windows sandbox.
 
 ### Highlights
 
 - standalone Windows experience;
 - automatic connection to local DeepSeek Harness;
-- original Harness UI and functionality;
 - built-in Russian localization;
-- compact Windows installer;
-- no need to manually open the Harness URL in a browser.
+- automatic Node.js setup when it is missing;
+- compact installer, distribution archive and native package;
+- code-signing certificate included in the release.
 
-### Disclaimer
-
-This is an independent community project and is not an official DeepSeek product.
-
----
+> Independent community project. Not affiliated with or endorsed by DeepSeek.
 
 <div align="center">
 
-**DeepSeek Harness · Windows · Русский**
+**[Download DeepSeek Harness Desktop RU v1.0.0](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0)**
 
 </div>
