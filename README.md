@@ -5,9 +5,11 @@
 ### Windows-клиент DeepSeek Harness с полноценной русской локализацией
 
 <p>
-  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0"><img src="https://img.shields.io/github/v/release/Leostrange/DeepSeek-Harness-Desktop-RU?style=for-the-badge&label=Релиз&color=4c6fff" alt="Последний релиз"></a>
-  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases"><img src="https://img.shields.io/github/downloads/Leostrange/DeepSeek-Harness-Desktop-RU/total?style=for-the-badge&label=Загрузки&color=16a085" alt="Загрузки"></a>
-  <img src="https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows 10/11">
+  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.0.0"><strong>Release v1.0.0</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases"><strong>Downloads</strong></a>
+  &nbsp;·&nbsp;
+  <strong>Windows 10/11</strong>
 </p>
 
 <p>
