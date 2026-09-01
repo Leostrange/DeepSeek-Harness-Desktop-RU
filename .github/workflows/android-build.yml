@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -24,6 +24,238 @@ jobs:
         run: |
           cp ci/patches/DebExtractor.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/DebExtractor.kt
           cp ci/patches/RuntimeInstaller.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt
+
+          cat > android/app/src/main/java/io/leostrange/dshandroid/runtime/NativeBuildConfig.kt <<'KOTLIN'
+          package io.leostrange.dshandroid.runtime
+
+          object NativeBuildConfig {
+              val requiredPackages: Set<String> = setOf(
+                  "cmake", "clang", "make", "python", "binutils", "pkg-config",
+                  "libandroid-spawn", "termux-tools",
+              )
+
+              const val allowScripts = "@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs,pnpm"
+              private const val androidTarget = "aarch64-linux-android30"
+
+              fun npmBuildEnvironment(prefix: String): Map<String, String> = mapOf(
+                  "CFLAGS" to "-target $androidTarget",
+                  "CXXFLAGS" to "-target $androidTarget",
+                  "CMAKE_BUILD_PARALLEL_LEVEL" to "2",
+                  "npm_config_nodedir" to prefix,
+              )
+          }
+          KOTLIN
+
+          cat > android/app/src/test/java/io/leostrange/dshandroid/runtime/NativeBuildConfigTest.kt <<'KOTLIN'
+          package io.leostrange.dshandroid.runtime
+
+          import kotlin.test.Test
+          import kotlin.test.assertEquals
+          import kotlin.test.assertTrue
+
+          class NativeBuildConfigTest {
+              @Test
+              fun includesNativeToolchainNeededByDsh() {
+                  val required = NativeBuildConfig.requiredPackages
+                  listOf("cmake", "clang", "make", "python", "binutils", "pkg-config", "libandroid-spawn")
+                      .forEach { assertTrue(it in required, "missing $it") }
+              }
+
+              @Test
+              fun targetsAndroidApi30ForNativeModules() {
+                  val env = NativeBuildConfig.npmBuildEnvironment("/prefix")
+                  assertEquals("-target aarch64-linux-android30", env["CFLAGS"])
+                  assertEquals("-target aarch64-linux-android30", env["CXXFLAGS"])
+                  assertEquals("2", env["CMAKE_BUILD_PARALLEL_LEVEL"])
+                  assertEquals("/prefix", env["npm_config_nodedir"])
+              }
+          }
+          KOTLIN
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('android/app/src/main/java/io/leostrange/dshandroid/HarnessForegroundService.kt')
+          s = p.read_text()
+          s = s.replace(
+              'import io.leostrange.dshandroid.runtime.ProotRunner\n',
+              'import io.leostrange.dshandroid.runtime.NativeBuildConfig\nimport io.leostrange.dshandroid.runtime.ProotRunner\n',
+          )
+          s = s.replace(
+              '''                if (!harnessInstalled(installer.runtimeRoot)) {
+                              installHarness(runner)
+                          }
+
+                          launchHarness(runner)
+          ''',
+              '''                if (!harnessInstalled(installer.runtimeRoot)) {
+                              prepareNativeBuild(runner, installer.runtimeRoot)
+                              installHarness(runner)
+                              installSharpWasmFallback(runner, installer.runtimeRoot)
+                              installDshLauncher(installer.runtimeRoot)
+                          }
+
+                          verifyHarnessNativeModules(runner)
+                          launchHarness(runner)
+          ''',
+          )
+
+          replacement = r'''    private fun prepareNativeBuild(runner: ProotRunner, runtimeRoot: File) {
+                  setState(HarnessStage.INSTALLING_HARNESS, "Подготавливаю Android toolchain для native-модулей…")
+                  appendLog("Preparing Koffi/node-pty native build toolchain…")
+
+                  val allowScripts = runner.runCapture(
+                      listOf(
+                          "${RuntimePaths.PREFIX}/bin/npm", "config", "set",
+                          "allow-scripts=${NativeBuildConfig.allowScripts}", "--location=user",
+                      ),
+                      30,
+                  )
+                  if (allowScripts.exitCode != 0) appendLog("npm allow-scripts: ${allowScripts.output}")
+
+                  val nodeGyp = "${RuntimePaths.PREFIX}/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js"
+                  val headers = runner.runCapture(
+                      listOf("${RuntimePaths.PREFIX}/bin/node", nodeGyp, "install"),
+                      180,
+                      NativeBuildConfig.npmBuildEnvironment(RuntimePaths.PREFIX),
+                  )
+                  appendLog("node-gyp headers: ${headers.output}")
+                  patchCommonGypi(runtimeRoot)
+              }
+
+              private fun patchCommonGypi(runtimeRoot: File) {
+                  val roots = listOf(
+                      File(RuntimePaths.hostHome(runtimeRoot), ".cache/node-gyp"),
+                      File(RuntimePaths.hostPrefix(runtimeRoot), "include/node"),
+                  )
+                  var patched = 0
+                  roots.filter { it.exists() }.forEach { root ->
+                      root.walkTopDown().filter { it.isFile && it.name == "common.gypi" }.forEach fileLoop@{ file ->
+                          val text = file.readText()
+                          if ("android_ndk_path%'" in text) return@fileLoop
+                          val marker = "'variables': {"
+                          val index = text.indexOf(marker)
+                          if (index >= 0) {
+                              val insertAt = index + marker.length
+                              file.writeText(text.substring(0, insertAt) + "\n    'android_ndk_path%': ''," + text.substring(insertAt))
+                              patched++
+                          }
+                      }
+                  }
+                  appendLog("common.gypi patched: $patched")
+              }
+
+              private fun installHarness(runner: ProotRunner) {
+                  setState(HarnessStage.INSTALLING_HARNESS, "Компилирую и устанавливаю @deepseek-ai/dsh…")
+                  appendLog("Installing @deepseek-ai/dsh from npm with Android native build flags…")
+                  val env = NativeBuildConfig.npmBuildEnvironment(RuntimePaths.PREFIX) + mapOf(
+                      "DSH_NO_LANDLOCK" to "1",
+                      "CI" to "1",
+                  )
+                  val process = runner.start(
+                      listOf(
+                          "${RuntimePaths.PREFIX}/bin/npm",
+                          "install",
+                          "--global",
+                          "--foreground-scripts",
+                          "--no-audit",
+                          "--no-fund",
+                          "@deepseek-ai/dsh",
+                      ),
+                      env,
+                  )
+                  streamProcess(process)
+                  if (!process.waitFor(20, TimeUnit.MINUTES)) {
+                      process.destroy()
+                      if (!process.waitFor(2, TimeUnit.SECONDS)) process.destroyForcibly()
+                      throw IllegalStateException("npm install @deepseek-ai/dsh timed out")
+                  }
+                  if (process.exitValue() != 0) {
+                      throw IllegalStateException("npm install @deepseek-ai/dsh failed (exit ${process.exitValue()})")
+                  }
+                  appendLog("Harness npm package installed")
+              }
+
+              private fun installSharpWasmFallback(runner: ProotRunner, runtimeRoot: File) {
+                  val prefix = RuntimePaths.hostPrefix(runtimeRoot)
+                  val dsh = File(prefix, "lib/node_modules/@deepseek-ai/dsh")
+                  val sharpPackage = File(dsh, "node_modules/sharp/package.json")
+                  if (!sharpPackage.isFile) return
+                  val version = Regex("\\\"version\\\"\\s*:\\s*\\\"([^\\\"]+)\\\"").find(sharpPackage.readText())?.groupValues?.get(1) ?: return
+                  val target = File(dsh, "node_modules/@img/sharp-wasm32")
+                  if (target.resolve("lib").listFiles()?.any { it.extension == "wasm" } == true) return
+
+                  setState(HarnessStage.INSTALLING_HARNESS, "Устанавливаю sharp WebAssembly fallback…")
+                  appendLog("Installing @img/sharp-wasm32@$version…")
+                  val workGuest = "${RuntimePaths.HOME}/.dsh-sharp-wasm"
+                  val result = runner.runCapture(
+                      listOf(
+                          "${RuntimePaths.PREFIX}/bin/npm", "install",
+                          "--prefix", workGuest,
+                          "--no-save", "--no-audit", "--no-fund",
+                          "@img/sharp-wasm32@$version",
+                      ),
+                      300,
+                  ).requireSuccess("sharp wasm fallback")
+                  if (result.output.isNotBlank()) appendLog(result.output)
+
+                  val workHost = File(RuntimePaths.hostHome(runtimeRoot), ".dsh-sharp-wasm/node_modules")
+                  val source = File(workHost, "@img/sharp-wasm32")
+                  require(source.isDirectory) { "sharp-wasm32 package was not installed" }
+                  target.deleteRecursively()
+                  target.parentFile?.mkdirs()
+                  source.copyRecursively(target, overwrite = true)
+                  val emnapiSource = File(workHost, "@emnapi")
+                  if (emnapiSource.isDirectory) {
+                      val emnapiTarget = File(dsh, "node_modules/@emnapi")
+                      emnapiTarget.deleteRecursively()
+                      emnapiSource.copyRecursively(emnapiTarget, overwrite = true)
+                  }
+                  File(RuntimePaths.hostHome(runtimeRoot), ".dsh-sharp-wasm").deleteRecursively()
+              }
+
+              private fun installDshLauncher(runtimeRoot: File) {
+                  val prefix = RuntimePaths.hostPrefix(runtimeRoot)
+                  val dshDir = "${RuntimePaths.PREFIX}/lib/node_modules/@deepseek-ai/dsh"
+                  val launcher = File(prefix, "bin/dsh")
+                  launcher.delete()
+                  launcher.writeText(
+                      "#!${RuntimePaths.PREFIX}/bin/sh\n" +
+                          "exec ${RuntimePaths.PREFIX}/bin/node --expose-internals $dshDir/lib/bin.js \"\$@\"\n"
+                  )
+                  launcher.setExecutable(true, true)
+              }
+
+              private fun verifyHarnessNativeModules(runner: ProotRunner) {
+                  val dsh = "${RuntimePaths.PREFIX}/lib/node_modules/@deepseek-ai/dsh"
+                  val koffi = runner.runCapture(
+                      listOf(
+                          "${RuntimePaths.PREFIX}/bin/node", "--input-type=module", "-e",
+                          "await import('$dsh/node_modules/koffi/index.js')",
+                      ),
+                      30,
+                  )
+                  if (koffi.exitCode != 0) appendLog("koffi verification warning: ${koffi.output}")
+                  val dshVersion = runner.runCapture(listOf("${RuntimePaths.PREFIX}/bin/dsh", "--version"), 30)
+                  dshVersion.requireSuccess("dsh --version")
+                  appendLog("dsh: ${dshVersion.output}")
+              }
+
+'''
+          s2, n = re.subn(
+              r'    private fun installHarness\(runner: ProotRunner\) \{.*?\n    private fun launchHarness\(runner: ProotRunner\) \{',
+              replacement + '    private fun launchHarness(runner: ProotRunner) {',
+              s,
+              count=1,
+              flags=re.S,
+          )
+          if n != 1:
+              raise SystemExit('HarnessForegroundService install block patch failed')
+          if 'prepareNativeBuild' not in s2 or 'NativeBuildConfig' not in s2:
+              raise SystemExit('HarnessForegroundService native build patch missing')
+          p.write_text(s2)
+          PY
 
       - uses: actions/setup-java@v4
         with:
@@ -45,6 +277,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: DeepSeekHarness-Android-embedded-debug
+          name: DeepSeekHarness-Android-native-toolchain-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
