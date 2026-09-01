@@ -20,72 +20,10 @@ jobs:
           unzip -t android-build-src.zip
           unzip -q -o android-build-src.zip
 
-      - name: Apply Android fixes
+      - name: Apply patched runtime sources
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/DebExtractor.kt')
-          s = p.read_text()
-          s = s.replace('runCatching { Os.lstat(file.path) }.onSuccess { Os.unlink(file.path) }', 'runCatching { Os.lstat(file.path) }.onSuccess { file.delete() }')
-          needle = '                val entry = tar.nextTarEntry ?: break\n                val output = RuntimePaths.safeResolve(runtimeRoot, entry.name)'
-          replacement = '                val entry = tar.nextTarEntry ?: break\n                val normalizedEntryName = entry.name.replace(\'\\\\\', \'/\').removePrefix("./")\n                if (normalizedEntryName.isBlank() || normalizedEntryName == ".") continue\n                val output = RuntimePaths.safeResolve(runtimeRoot, entry.name)'
-          if needle not in s:
-              raise SystemExit('DebExtractor root-entry patch anchor not found')
-          s = s.replace(needle, replacement, 1)
-          p.write_text(s)
-
-          p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt')
-          s = p.read_text()
-          s = s.replace('import org.apache.commons.compress.compressors.xz.XZCompressorInputStream\n', '')
-          s = s.replace('import java.io.BufferedInputStream\n', '')
-          s = re.sub(
-              r'\s*val indexFile = File\(packageCache, "Packages\.xz"\)\s*progress\(RuntimeInstallProgress\("Индекс", 0, 1, "Скачиваю индекс пакетов Termux…"\)\)\s*download\(INDEX_URL, indexFile\)\s*val indexText = FileInputStream\(indexFile\)\.use \{ input ->\s*XZCompressorInputStream\(BufferedInputStream\(input\)\)\.bufferedReader\(\)\.use \{ it\.readText\(\) \}\s*\}\s*val index = TermuxPackageIndex\.parse\(indexText\)',
-              '\n        progress(RuntimeInstallProgress("Индекс", 0, 1, "Скачиваю индекс пакетов Termux…"))\n        val (repoBase, indexText) = downloadPackageIndex()\n        val index = TermuxPackageIndex.parse(indexText)',
-              s,
-              count=1,
-          )
-          s = s.replace('download(REPO_BASE + pkg.filename.removePrefix("/"), deb)', 'download(repoBase + pkg.filename.removePrefix("/"), deb)')
-          s = s.replace('appendLine("repo=$REPO_BASE")', 'appendLine("repo=$repoBase")')
-
-          helper = '''
-    private fun downloadPackageIndex(): Pair<String, String> {
-        val errors = mutableListOf<String>()
-        for (repoBase in REPO_BASES) {
-            val url = "${repoBase}dists/stable/main/binary-aarch64/Packages"
-            val indexFile = File(packageCache, "Packages")
-            try {
-                download(url, indexFile)
-                val text = indexFile.bufferedReader().use { it.readText() }
-                if (text.contains("Package:")) return repoBase to text
-                errors += "$url: downloaded index is invalid"
-            } catch (t: Throwable) {
-                errors += "$url: ${t.message ?: t.javaClass.simpleName}"
-            } finally {
-                indexFile.delete()
-            }
-        }
-        throw IllegalStateException("Не удалось скачать индекс Termux. " + errors.joinToString(" | "))
-    }
-'''
-          if 'private fun downloadPackageIndex()' not in s:
-              s = s.replace('\n    private fun verifySha256', helper + '\n    private fun verifySha256')
-
-          s = re.sub(
-              r'private const val REPO_BASE = "https://packages\.termux\.dev/apt/termux-main/"\s*private const val INDEX_URL = "\$\{REPO_BASE\}dists/stable/main/binary-aarch64/Packages\.xz"',
-              'private val REPO_BASES = listOf(\n            "https://packages-cf.termux.dev/apt/termux-main/",\n            "https://packages.termux.dev/apt/termux-main/",\n            "https://ftp.fau.de/termux/termux-main/",\n        )',
-              s,
-              count=1,
-          )
-          s = s.replace('runCatching { android.system.Os.unlink(hostPath.path) }', 'hostPath.delete()')
-
-          if 'Packages.xz' in s or 'INDEX_URL' in s or 'REPO_BASE +' in s:
-              raise SystemExit('RuntimeInstaller index patch did not apply completely')
-          if 'downloadPackageIndex()' not in s or 'REPO_BASES' not in s:
-              raise SystemExit('RuntimeInstaller fallback helper missing')
-          p.write_text(s)
-          PY
+          cp ci/patches/DebExtractor.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/DebExtractor.kt
+          cp ci/patches/RuntimeInstaller.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt
 
       - uses: actions/setup-java@v4
         with:
