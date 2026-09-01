@@ -242,7 +242,7 @@ jobs:
                   appendLog("dsh: ${dshVersion.output}")
               }
 
-'''
+          '''
           s2, n = re.subn(
               r'    private fun installHarness\(runner: ProotRunner\) \{.*?\n    private fun launchHarness\(runner: ProotRunner\) \{',
               replacement + '    private fun launchHarness(runner: ProotRunner) {',
