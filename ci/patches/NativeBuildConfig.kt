@@ -20,4 +20,17 @@ object NativeBuildConfig {
         "CXXFLAGS" to "-target $ANDROID_TARGET",
         "CMAKE_BUILD_PARALLEL_LEVEL" to "2",
     )
+
+    fun initialNpmInstallArgs(prefix: String): List<String> = listOf(
+        "$prefix/bin/npm",
+        "install",
+        "--global",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "@deepseek-ai/dsh",
+    )
+
+    fun rebuildShellCommand(prefix: String): String =
+        "cd '$prefix/lib/node_modules/@deepseek-ai/dsh' && '$prefix/bin/npm' rebuild --foreground-scripts --no-audit --no-fund"
 }
