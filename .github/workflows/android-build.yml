@@ -13,8 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Extract Android source
-        run: unzip -q -o android-build-src.zip
+      - name: Reconstruct Android source
+        run: |
+          cat ci/android-src.part00 ci/android-src.part01 ci/android-src.part02 ci/android-src.part03 ci/android-src.part04 ci/android-src.part05 ci/android-src.part06 ci/android-src.part07 > android-build-src.zip.b64
+          base64 -d android-build-src.zip.b64 > android-build-src.zip
+          unzip -t android-build-src.zip
+          unzip -q -o android-build-src.zip
 
       - uses: actions/setup-java@v4
         with:
