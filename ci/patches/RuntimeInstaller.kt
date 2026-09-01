@@ -16,11 +16,20 @@ class RuntimeInstaller(private val context: Context) {
     private val extractor = DebExtractor(File(context.cacheDir, "deb-extract"))
 
     fun isInstalled(): Boolean {
-        if (!marker.isFile) return false
+        if (!marker.isFile || !marker.readText().lineSequence().any { it == "schema=$RUNTIME_SCHEMA" }) return false
         val prefix = RuntimePaths.hostPrefix(runtimeRoot)
         return pathPresent(File(prefix, "bin/proot")) &&
             pathPresent(File(prefix, "bin/node")) &&
-            pathPresent(File(prefix, "bin/npm"))
+            pathPresent(File(prefix, "bin/npm")) &&
+            NativeBuildConfig.requiredPackages.all { packageName ->
+                when (packageName) {
+                    "libandroid-spawn" -> pathPresent(File(prefix, "lib/libandroid-spawn.so"))
+                    "pkg-config" -> pathPresent(File(prefix, "bin/pkg-config"))
+                    "python" -> pathPresent(File(prefix, "bin/python"))
+                    "termux-tools" -> pathPresent(File(prefix, "bin/termux-info"))
+                    else -> pathPresent(File(prefix, "bin/$packageName"))
+                }
+            }
     }
 
     fun ensureInstalled(force: Boolean = false, progress: (RuntimeInstallProgress) -> Unit = {}) {
@@ -77,6 +86,7 @@ class RuntimeInstaller(private val context: Context) {
         marker.parentFile?.mkdirs()
         marker.writeText(
             buildString {
+                appendLine("schema=$RUNTIME_SCHEMA")
                 appendLine("repo=$repoBase")
                 selected.forEach { appendLine("${it.name}=${it.version}") }
             }
@@ -188,6 +198,7 @@ class RuntimeInstaller(private val context: Context) {
             "https://packages.termux.dev/apt/termux-main/",
             "https://ftp.fau.de/termux/termux-main/",
         )
+        private const val RUNTIME_SCHEMA = 2
         private val ROOT_PACKAGES = setOf(
             "proot",
             "nodejs-lts",
@@ -198,7 +209,7 @@ class RuntimeInstaller(private val context: Context) {
             "openssl",
             "procps",
             "termux-exec",
-        )
+        ) + NativeBuildConfig.requiredPackages
     }
 }
 
