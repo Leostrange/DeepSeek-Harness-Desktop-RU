@@ -20,6 +20,20 @@ jobs:
           unzip -t android-build-src.zip
           unzip -q -o android-build-src.zip
 
+      - name: Apply Android compile fix
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/DebExtractor.kt')
+          s = p.read_text()
+          s = s.replace('runCatching { Os.lstat(file.path) }.onSuccess { Os.unlink(file.path) }', 'runCatching { Os.lstat(file.path) }.onSuccess { file.delete() }')
+          p.write_text(s)
+          p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt')
+          s = p.read_text()
+          s = s.replace('runCatching { android.system.Os.lstat(hostPath.path) }.onSuccess {\n                runCatching { android.system.Os.unlink(hostPath.path) }\n            }', 'runCatching { android.system.Os.lstat(hostPath.path) }.onSuccess {\n                hostPath.delete()\n            }')
+          p.write_text(s)
+          PY
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
