@@ -78,12 +78,14 @@ if (os.platform() === 'android') {
 
 '''
 
-s2, n = re.subn(
+pattern = re.compile(
     r'    private fun installHarness\(runner: ProotRunner\) \{.*?\n    private fun installSharpWasmFallback\(runner: ProotRunner, runtimeRoot: File\) \{',
-    replacement + '    private fun installSharpWasmFallback(runner: ProotRunner, runtimeRoot: File) {',
+    re.S,
+)
+s2, n = pattern.subn(
+    lambda _: replacement + '    private fun installSharpWasmFallback(runner: ProotRunner, runtimeRoot: File) {',
     s,
     count=1,
-    flags=re.S,
 )
 if n != 1:
     raise SystemExit('installHarness patch failed')
