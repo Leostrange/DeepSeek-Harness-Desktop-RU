@@ -25,7 +25,7 @@ jobs:
           cp ci/patches/DebExtractor.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/DebExtractor.kt
           cp ci/patches/RuntimeInstaller.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt
           cp ci/patches/NativeBuildConfig.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/NativeBuildConfig.kt
-          base64 -d ci/patches/HarnessForegroundService.kt.gz.b64 | gzip -d > android/app/src/main/java/io/leostrange/dshandroid/HarnessForegroundService.kt
+          cp ci/patches/HarnessForegroundService.kt android/app/src/main/java/io/leostrange/dshandroid/HarnessForegroundService.kt
 
           cat > android/app/src/test/java/io/leostrange/dshandroid/runtime/NativeBuildConfigTest.kt <<'KOTLIN'
           package io.leostrange.dshandroid.runtime
@@ -44,11 +44,10 @@ jobs:
 
               @Test
               fun targetsAndroidApi30ForNativeModules() {
-                  val env = NativeBuildConfig.npmBuildEnvironment("/prefix")
+                  val env = NativeBuildConfig.npmBuildEnvironment()
                   assertEquals("-target aarch64-linux-android30", env["CFLAGS"])
                   assertEquals("-target aarch64-linux-android30", env["CXXFLAGS"])
                   assertEquals("2", env["CMAKE_BUILD_PARALLEL_LEVEL"])
-                  assertEquals("/prefix", env["npm_config_nodedir"])
               }
           }
           KOTLIN
