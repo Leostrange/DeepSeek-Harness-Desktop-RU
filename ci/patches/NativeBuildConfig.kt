@@ -12,13 +12,12 @@ object NativeBuildConfig {
         "termux-tools",
     )
 
-    const val allowScripts = "@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs,pnpm"
-    private const val androidTarget = "aarch64-linux-android30"
+    const val ALLOW_SCRIPTS = "@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs,pnpm"
+    private const val ANDROID_TARGET = "aarch64-linux-android30"
 
-    fun npmBuildEnvironment(prefix: String): Map<String, String> = mapOf(
-        "CFLAGS" to "-target $androidTarget",
-        "CXXFLAGS" to "-target $androidTarget",
+    fun npmBuildEnvironment(): Map<String, String> = mapOf(
+        "CFLAGS" to "-target $ANDROID_TARGET",
+        "CXXFLAGS" to "-target $ANDROID_TARGET",
         "CMAKE_BUILD_PARALLEL_LEVEL" to "2",
-        "npm_config_nodedir" to prefix,
     )
 }
