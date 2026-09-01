@@ -22,11 +22,23 @@ jobs:
 
       - name: Apply Android fixes
         run: |
-          cp ci/RuntimeInstaller.kt android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt
           python3 - <<'PY'
           from pathlib import Path
+          import re
+
           p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/DebExtractor.kt')
-          s = p.read_text().replace('runCatching { Os.lstat(file.path) }.onSuccess { Os.unlink(file.path) }', 'runCatching { Os.lstat(file.path) }.onSuccess { file.delete() }')
+          s = p.read_text()
+          s = s.replace('runCatching { Os.lstat(file.path) }.onSuccess { Os.unlink(file.path) }', 'runCatching { Os.lstat(file.path) }.onSuccess { file.delete() }')
+          needle = '                val entry = tar.nextTarEntry ?: break\n                val output = RuntimePaths.safeResolve(runtimeRoot, entry.name)'
+          replacement = '                val entry = tar.nextTarEntry ?: break\n                val normalizedEntryName = entry.name.replace(\'\\\\\', \'/\').removePrefix("./")\n                if (normalizedEntryName.isBlank() || normalizedEntryName == ".") continue\n                val output = RuntimePaths.safeResolve(runtimeRoot, entry.name)'
+          if needle not in s:
+              raise SystemExit('DebExtractor root-entry patch anchor not found')
+          s = s.replace(needle, replacement, 1)
+          p.write_text(s)
+
+          p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt')
+          s = p.read_text()
+          s = s.replace('runCatching { android.system.Os.unlink(hostPath.path) }', 'hostPath.delete()')
           p.write_text(s)
           PY
 
