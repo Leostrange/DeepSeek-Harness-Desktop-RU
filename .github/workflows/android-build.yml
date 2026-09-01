@@ -20,17 +20,71 @@ jobs:
           unzip -t android-build-src.zip
           unzip -q -o android-build-src.zip
 
-      - name: Apply Android compile fix
+      - name: Apply Android fixes
         run: |
           python3 - <<'PY'
           from pathlib import Path
+
           p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/DebExtractor.kt')
           s = p.read_text()
           s = s.replace('runCatching { Os.lstat(file.path) }.onSuccess { Os.unlink(file.path) }', 'runCatching { Os.lstat(file.path) }.onSuccess { file.delete() }')
           p.write_text(s)
+
           p = Path('android/app/src/main/java/io/leostrange/dshandroid/runtime/RuntimeInstaller.kt')
           s = p.read_text()
-          s = s.replace('runCatching { android.system.Os.lstat(hostPath.path) }.onSuccess {\n                runCatching { android.system.Os.unlink(hostPath.path) }\n            }', 'runCatching { android.system.Os.lstat(hostPath.path) }.onSuccess {\n                hostPath.delete()\n            }')
+          s = s.replace('import org.apache.commons.compress.compressors.xz.XZCompressorInputStream\n', '')
+          s = s.replace('import java.io.BufferedInputStream\n', '')
+          s = s.replace('''        val indexFile = File(packageCache, "Packages.xz")
+          progress(RuntimeInstallProgress("Индекс", 0, 1, "Скачиваю индекс пакетов Termux…"))
+          download(INDEX_URL, indexFile)
+          val indexText = FileInputStream(indexFile).use { input ->
+              XZCompressorInputStream(BufferedInputStream(input)).bufferedReader().use { it.readText() }
+          }
+          val index = TermuxPackageIndex.parse(indexText)
+          ''', '''        progress(RuntimeInstallProgress("Индекс", 0, 1, "Скачиваю индекс пакетов Termux…"))
+          val (repoBase, indexText) = downloadPackageIndex()
+          val index = TermuxPackageIndex.parse(indexText)
+          ''')
+          s = s.replace('download(REPO_BASE + pkg.filename.removePrefix("/"), deb)', 'download(repoBase + pkg.filename.removePrefix("/"), deb)')
+          s = s.replace('appendLine("repo=$REPO_BASE")', 'appendLine("repo=$repoBase")')
+          marker = '\n    private fun verifySha256'
+          helper = '''
+              private fun downloadPackageIndex(): Pair<String, String> {
+                  val errors = mutableListOf<String>()
+                  for (repoBase in REPO_BASES) {
+                      val url = "${repoBase}dists/stable/main/binary-aarch64/Packages"
+                      val indexFile = File(packageCache, "Packages")
+                      try {
+                          download(url, indexFile)
+                          val text = indexFile.bufferedReader().use { it.readText() }
+                          if (text.contains("Package:")) return repoBase to text
+                          errors += "$url: downloaded index is invalid"
+                      } catch (t: Throwable) {
+                          errors += "$url: ${t.message ?: t.javaClass.simpleName}"
+                      } finally {
+                          indexFile.delete()
+                      }
+                  }
+                  throw IllegalStateException("Не удалось скачать индекс Termux. " + errors.joinToString(" | "))
+              }
+          '''
+          if 'private fun downloadPackageIndex()' not in s:
+              s = s.replace(marker, helper + marker)
+          s = s.replace('''    companion object {
+              private const val REPO_BASE = "https://packages.termux.dev/apt/termux-main/"
+              private const val INDEX_URL = "${REPO_BASE}dists/stable/main/binary-aarch64/Packages.xz"
+          ''', '''    companion object {
+              private val REPO_BASES = listOf(
+                  "https://packages-cf.termux.dev/apt/termux-main/",
+                  "https://packages.termux.dev/apt/termux-main/",
+                  "https://ftp.fau.de/termux/termux-main/",
+              )
+          ''')
+          s = s.replace('''            runCatching { android.system.Os.lstat(hostPath.path) }.onSuccess {
+                          runCatching { android.system.Os.unlink(hostPath.path) }
+                      }''', '''            runCatching { android.system.Os.lstat(hostPath.path) }.onSuccess {
+                          hostPath.delete()
+                      }''')
           p.write_text(s)
           PY
 
