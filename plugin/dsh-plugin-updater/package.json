@@ -1,0 +1,9 @@
+{
+  "name": "@deepseek-ai/dsh-plugin-updater",
+  "description": "Official DeepSeek Harness auto-updater — checks GitHub releases, downloads, applies updates from within the settings UI.",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": { ".": "./lib/index.js" },
+  "dependencies": {}
+}

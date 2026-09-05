@@ -1,0 +1,125 @@
+<Window x:Class="DeepSeekHarness.Setup.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Установка DeepSeek Harness" Width="520" Height="400" MinWidth="480" MinHeight="380"
+        Background="#101114" WindowStartupLocation="CenterScreen" Icon="/app-icon.ico"
+        ResizeMode="CanResize" WindowStyle="None" AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+  <Border CornerRadius="10" BorderBrush="#30343D" BorderThickness="1" Background="#101114">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="90"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <!-- ═══ Баннер ═══ -->
+      <Border Grid.Row="0" CornerRadius="10,10,0,0" ClipToBounds="True">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1A1D24" Offset="0"/>
+            <GradientStop Color="#0D2137" Offset="0.5"/>
+            <GradientStop Color="#1A1D24" Offset="1"/>
+          </LinearGradientBrush>
+        </Border.Background>
+        <Grid Margin="24,0">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <Border Width="44" Height="44" CornerRadius="11" Background="#20232A" Padding="5" Margin="0,0,12,0">
+              <Image Source="/app-icon.ico" RenderOptions.BitmapScalingMode="HighQuality"/>
+            </Border>
+            <StackPanel VerticalAlignment="Center">
+              <TextBlock Text="DeepSeek Harness" FontSize="17" FontWeight="SemiBold" Foreground="#F1F3F5"/>
+              <TextBlock Text="Локальный клиент" FontSize="11" Foreground="#6B7280" Margin="0,2,0,0"/>
+            </StackPanel>
+          </StackPanel>
+          <Button HorizontalAlignment="Right" VerticalAlignment="Top"
+                  Click="Cancel_Click" Margin="0,8,4,0" Width="28" Height="28"
+                  Cursor="Hand">
+            <Button.Template>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="Transparent" CornerRadius="6" Width="28" Height="28">
+                  <TextBlock Text="X" FontSize="12" FontWeight="Bold"
+                             Foreground="#6B7280" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#2A2D35"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+        </Grid>
+      </Border>
+
+      <!-- ═══ Страница 1: Настройки ═══ -->
+      <StackPanel x:Name="SettingsPage" Grid.Row="1" Margin="24,14,24,0">
+        <TextBlock Text="ПАПКА УСТАНОВКИ" FontSize="10" FontWeight="SemiBold" Foreground="#6B7280"
+                   Margin="0,0,0,6"/>
+        <Border Background="#181A1F" CornerRadius="6" BorderBrush="#30343D" BorderThickness="1" Padding="2">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="InstallDirBox" Grid.Column="0" BorderThickness="0" Background="Transparent"
+                     Padding="10,8" FontSize="12"/>
+            <Button Grid.Column="1" Content="Обзор..." Click="Browse_Click" Margin="4"
+                    Padding="12,5" FontSize="11" Tag="6"/>
+          </Grid>
+        </Border>
+
+        <TextBlock Text="ПАРАМЕТРЫ" FontSize="10" FontWeight="SemiBold" Foreground="#6B7280"
+                   Margin="0,16,0,8"/>
+        <StackPanel Margin="2,0,0,0">
+          <CheckBox x:Name="StartMenuChk" Content="Ярлык в меню Пуск" IsChecked="True" Margin="0,0,0,5" FontSize="12"/>
+          <CheckBox x:Name="DesktopChk" Content="Ярлык на рабочем столе" IsChecked="True" Margin="0,0,0,5" FontSize="12"/>
+          <CheckBox x:Name="AutostartChk" Content="Запускать при входе в Windows" IsChecked="False" Margin="0,0,0,5" FontSize="12"/>
+          <CheckBox x:Name="LaunchChk" Content="Запустить после установки" IsChecked="True" FontSize="12"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- ═══ Страница 2: Прогресс (скрыта) ═══ -->
+      <Grid x:Name="ProgressPage" Grid.Row="1" Margin="24,14,24,0" Visibility="Collapsed">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="StepLabel" Grid.Row="0" Text="Подготовка..." FontSize="14"
+                   Foreground="#F1F3F5" Margin="0,0,0,12"/>
+
+        <Border Grid.Row="1" Background="#20232A" CornerRadius="4" Height="6" Margin="0,0,0,8">
+          <Border x:Name="ProgressFill" Background="#4A9EFF" CornerRadius="4"
+                  HorizontalAlignment="Left" Width="0"/>
+        </Border>
+
+        <TextBlock x:Name="PercentLabel" Grid.Row="2" Text="0%" FontSize="12" Foreground="#6B7280"
+                   HorizontalAlignment="Right" Margin="0,0,0,16"/>
+
+        <Border Grid.Row="3" Background="#181A1F" CornerRadius="6" BorderBrush="#30343D"
+                BorderThickness="1" Padding="12">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="Log" Text="" Foreground="#4B5058" FontSize="11" TextWrapping="Wrap"/>
+          </ScrollViewer>
+        </Border>
+      </Grid>
+
+      <!-- ═══ Нижняя панель ═══ -->
+      <Border Grid.Row="2" Background="#181A1F" CornerRadius="0,0,10,10" Padding="24,10">
+        <Grid Height="40">
+          <TextBlock Text="v0.1.0-rc.7" VerticalAlignment="Center" FontSize="10" Foreground="#4B5058"/>
+          <StackPanel x:Name="BottomButtons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button x:Name="CancelBtn" Content="Отмена" Click="Cancel_Click" IsCancel="True"
+                    Padding="16,0" Height="30" FontSize="12" Tag="6" Margin="0,0,8,0"/>
+            <Button x:Name="InstallBtn" Content="Установить" Click="Install_Click"
+                    Background="#4A9EFF" Foreground="#101114" FontWeight="SemiBold"
+                    Padding="22,0" Height="30" FontSize="12" Tag="6"/>
+          </StackPanel>
+        </Grid>
+      </Border>
+    </Grid>
+  </Border>
+</Window>
