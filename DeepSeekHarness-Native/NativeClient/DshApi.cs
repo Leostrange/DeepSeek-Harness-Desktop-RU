@@ -38,6 +38,7 @@ public sealed class DshHost : IDisposable
     {
         EnsureUpdaterWiring();
         await ApplyRussianPatchAsync();
+        ApplyBrowsePickerPatch();
 
         if (await IsReadyAsync(cancellationToken)) return;
 
@@ -167,6 +168,43 @@ public sealed class DshHost : IDisposable
         catch
         {
             // Best effort — the bundled copy ships pre-patched anyway.
+        }
+    }
+
+    /// <summary>
+    /// Forces the in-app browse directory picker on Windows instead of the native
+    /// Win32 COM dialog.  The native dialog relies on koffi + IFileOpenDialog and
+    /// can fail silently ("Failed to fetch") when COM is unreachable from the
+    /// sandboxed WebView2 process.
+    /// </summary>
+    private void ApplyBrowsePickerPatch()
+    {
+        try
+        {
+            var script = Path.GetFullPath(Path.Combine(InstallRoot, "i18n-ru", "patch-browse-picker.mjs"));
+            if (!File.Exists(script)) return;
+
+            var modulesRoot = Path.GetFullPath(Path.Combine(
+                InstallRoot, "harness", "node_modules", "@deepseek-ai", "dsh", "node_modules", "@deepseek-ai"));
+            var args = Directory.Exists(modulesRoot)
+                ? $"\"{script}\" --base=\"{modulesRoot}\""
+                : $"\"{script}\"";
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = ResolveNode(),
+                Arguments = args,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            using var p = Process.Start(psi);
+            p?.WaitForExit(TimeSpan.FromSeconds(10));
+        }
+        catch
+        {
+            // Best effort — must never block startup.
         }
     }
 
