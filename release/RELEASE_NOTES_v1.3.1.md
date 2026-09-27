@@ -1,5 +1,7 @@
 # DeepSeek Harness Desktop RU v1.3.1
 
+> ⚠️ В этой версии обнаружена ошибка метаданных некоторых плагинов. Используйте [исправленный релиз v1.3.2](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.3.2).
+
 Исправлена неполная русификация вкладки «Плагины» в Desktop v1.3.0.
 
 - Добавлены русские описания всех 283 встроенных пакетов DeepSeek Harness `0.1.7-rc.2`.
