@@ -110,7 +110,7 @@
       <!-- ═══ Нижняя панель ═══ -->
       <Border Grid.Row="2" Background="#181A1F" CornerRadius="0,0,10,10" Padding="24,10">
         <Grid Height="40">
-          <TextBlock Text="Desktop v1.3.0  |  Harness v0.1.7-rc.2" VerticalAlignment="Center" FontSize="10" Foreground="#4B5058"/>
+          <TextBlock Text="Desktop v1.3.1  |  Harness v0.1.7-rc.2" VerticalAlignment="Center" FontSize="10" Foreground="#4B5058"/>
           <StackPanel x:Name="BottomButtons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Button x:Name="CancelBtn" Content="Отмена" Click="Cancel_Click" IsCancel="True"
                     Padding="16,0" Height="30" FontSize="12" Tag="6" Margin="0,0,8,0"/>

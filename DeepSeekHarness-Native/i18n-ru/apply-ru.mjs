@@ -17,6 +17,7 @@
 import { readFileSync, writeFileSync, existsSync, copyFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { patchPluginDescriptions } from './patch-plugin-descriptions.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const dicts = JSON.parse(readFileSync(path.join(here, 'ru-dicts.json'), 'utf8'));
@@ -132,6 +133,7 @@ function patchPermissionLabels() {
 }
 
 if (REVERT) {
+  patchPluginDescriptions(true);
   let reverted = false;
   if (existsSync(backup)) {
     copyFileSync(backup, target);
@@ -195,3 +197,4 @@ console.log('Patched:', target);
 console.log('  LOCALES now includes ru;', Object.keys(dicts).length, 'namespaces registered.');
 
 patchPermissionLabels();
+patchPluginDescriptions();
