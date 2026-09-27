@@ -429,7 +429,7 @@
   },
   "@deepseek-ai/dsh-cordis-host-runner": {
     "en": "Dynamic package definition registry, host-half sandbox lifecycle, and invoke handler table for model-mounted dual-half packages",
-    "ru": "Реестр определений динамических пакетов, жизненный цикл песочницы половины хоста и таблица обработчиков вызовов для двойных пакетов, смонтированных на модели."
+    "ru": "Реестр динамических пакетов, управление серверной песочницей и обработчики вызовов для двухчастных плагинов модели"
   },
   "@deepseek-ai/dsh-credentials": {
     "en": "Abstract credential seam (ctx.credentials): settings carry references to secrets, providers own the values",
@@ -957,7 +957,7 @@
   },
   "@deepseek-ai/dsh-tool-cordis": {
     "en": "Read-only runtime API inspection for Harness plugin development",
-    "ru": "Проверка API во время выполнения только для чтения для разработки плагинов Harness"
+    "ru": "Просмотр API работающего Harness в режиме только для чтения — для разработки плагинов"
   },
   "@deepseek-ai/dsh-tool-fs": {
     "en": "Model-facing filesystem tools (read, write, edit) over the DeepSeek Harness filesystem seam (ctx.fs)",
@@ -1073,7 +1073,7 @@
   },
   "@deepseek-ai/dsh-web-app": {
     "en": "The dsh browser-surface bundle: the web patch layer over dsh-base plus the runtime glue plugin (frontend dist serving, web-surface prompt, bash runtime variables, URL line)",
-    "ru": "Пакет поверхности браузера dsh: слой веб-патчей поверх dsh-base плюс подключаемый модуль среды выполнения (обслуживание внешнего интерфейса, подсказка веб-поверхности, переменные времени выполнения bash, строка URL-адреса)"
+    "ru": "Веб-пакет dsh: расширение dsh-base, раздача интерфейса, настройки веб-среды, переменные Bash и адрес запуска"
   },
   "@deepseek-ai/dsh-web-fetch-http": {
     "en": "Anonymous public HTTP(S) fetch provider for the DeepSeek Harness web capability seam (ctx.web)",
@@ -1130,5 +1130,21 @@
   "@deepseek-ai/schemastery": {
     "en": "Type driven schema validator",
     "ru": "Валидатор схемы, управляемой типом"
+  },
+  "dsh-ffmpeg": {
+    "en": "DSH 视频处理工具插件：ffmpeg_probe/cut/concat/encode/subtitle/extract/gif 七工具，进程走官方 subprocess 服务，超时树级终止、环境变量路径回退与多视频流探测，零运行时依赖（ffmpeg 本体除外）。",
+    "ru": "Семь инструментов для обработки видео: анализ, обрезка, объединение, кодирование, субтитры, извлечение и GIF. Использует службу subprocess, завершает дерево процессов при тайм-ауте и поддерживает несколько видеопотоков."
+  },
+  "dsh-plugin-git-workflow": {
+    "en": "DeepSeek Harness plugin: first-class Git workflow tools for the model — repo status, diffs, commit creation with validated messages, recent history, and branches. No bare-shell git calls; every invocation runs through the harness shell executor (sandbox + approval semantics) with quoted args, and path/message validation.",
+    "ru": "Инструменты Git для модели: состояние репозитория, различия, создание коммитов с проверкой сообщений, история и ветки. Команды выполняются через оболочку Harness с учётом песочницы и подтверждений."
+  },
+  "@maxwell-feng/dsh-windows-ocr": {
+    "en": "dsh plugin: recognize attached images with the built-in Windows OCR engine (Windows.Media.Ocr) and send only the recognized text to the model. Text models never receive image bytes; vision passthrough is opt-in.",
+    "ru": "Распознаёт текст на прикреплённых изображениях средствами Windows OCR и отправляет модели только распознанный текст. Передача исходного изображения доступна отдельно."
+  },
+  "@deepseek-ai/dsh-plugin-updater": {
+    "en": "Official DeepSeek Harness auto-updater — checks GitHub releases, downloads, applies updates from within the settings UI.",
+    "ru": "Проверяет релизы на GitHub, загружает и устанавливает обновления Harness из раздела настроек."
   }
 }

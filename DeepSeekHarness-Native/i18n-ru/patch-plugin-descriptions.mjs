@@ -34,7 +34,7 @@ export function patchPluginDescriptions(revert = false) {
     `\t\tconst RU_PLUGIN_DESCRIPTIONS = ${JSON.stringify(map)};`,
     '\t\tconst originalDescription = localizedText("description", dictionaries, fallbackText(manifest?.description), "");',
     '\t\tconst ruEntry = RU_PLUGIN_DESCRIPTIONS[manifest?.name];',
-    '\t\tconst description = ruEntry?.en === manifest?.description && ruEntry.ru',
+    '\t\tconst description = ruEntry && ruEntry.en === manifest?.description && ruEntry.ru',
     '\t\t\t? { ...(typeof originalDescription === "object" ? originalDescription : { en: originalDescription ?? "" }), ru: ruEntry.ru }',
     '\t\t\t: originalDescription;',
     `\t\t${end}`,
