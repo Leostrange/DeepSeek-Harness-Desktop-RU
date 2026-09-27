@@ -12,8 +12,6 @@
 
 - `DeepSeekHarness-Setup.exe` — recommended installer
 - `DeepSeekHarness-Distribution.zip` — portable distribution
-- `DeepSeekHarness-Native.zip` — native client package
-- `DeepSeekHarness-CodeSigning.cer` — public self-signed certificate
 - `SHA256SUMS.txt` — SHA-256 checksums
 
 ## Verify downloads
@@ -26,7 +24,7 @@ Get-FileHash .\DeepSeekHarness-Setup.exe -Algorithm SHA256
 
 Compare the result with `SHA256SUMS.txt`.
 
-> The supplied certificate is self-signed and is not equivalent to a publicly trusted commercial code-signing certificate.
+> The v1.3.0 installer is not digitally signed.
 
 ## Upstream
 

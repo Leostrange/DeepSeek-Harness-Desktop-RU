@@ -84,6 +84,14 @@ const LOCALES_NEW = `\t\t/** The three shipped locales. */
 \t\t\tlabel: "Русский"
 \t\t}]);`;
 
+// Since 0.1.7 the locale package exposes a catalog instead of the old
+// hard-coded LOCALES array. Russian can be registered as another built-in
+// language while keeping English as its fallback.
+const LOCALE_IDS_OLD = '\t\tconst LOCALE_IDS = ["zh", "en"];';
+const LOCALE_IDS_NEW = '\t\tconst LOCALE_IDS = ["zh", "en", "ru"];';
+const LOCALE_METADATA_EN = '\t\t\ten: { label: "English" }';
+const LOCALE_METADATA_RU = '\t\t\ten: { label: "English" },\n\t\t\tru: {\n\t\t\t\tlabel: "Русский",\n\t\t\t\tfallback: "en"\n\t\t\t}';
+
 // ---- hardcoded permission option labels (Read Only / Workspace Write / Full access) ----
 function permissionBundlePaths() {
   return [
@@ -152,17 +160,22 @@ stripped = stripped.replace(/\n?\t\t\t\/\* == codebuff-ru:register start == \*\/
 let out = stripped;
 
 // 1) LOCALES (skip when the ru entry is already present from an earlier run)
-if (out.includes('id: "ru"')) {
+if (out.includes('id: "ru"') || out.includes('"zh", "en", "ru"')) {
   // already added
-} else if (!out.includes(LOCALES_OLD)) {
+} else if (out.includes(LOCALES_OLD)) {
+  out = out.replace(LOCALES_OLD, LOCALES_NEW);
+} else if (out.includes(LOCALE_IDS_OLD) && out.includes(LOCALE_METADATA_EN)) {
+  out = out.replace(LOCALE_IDS_OLD, LOCALE_IDS_NEW);
+  out = out.replace(LOCALE_METADATA_EN, LOCALE_METADATA_RU);
+} else {
   console.error('LOCALES block not found — dsh version may have changed. No changes written.');
   process.exit(1);
-} else {
-  out = out.replace(LOCALES_OLD, LOCALES_NEW);
 }
 
 // 2) dictionaries before `function apply(ctx) {`
-const applyMarker = '\t\tfunction apply(ctx) {';
+const applyMarker = out.includes('\t\tasync function apply(ctx) {')
+  ? '\t\tasync function apply(ctx) {'
+  : '\t\tfunction apply(ctx) {';
 if (!out.includes(applyMarker)) {
   console.error('apply(ctx) not found — dsh version may have changed. No changes written.');
   process.exit(1);

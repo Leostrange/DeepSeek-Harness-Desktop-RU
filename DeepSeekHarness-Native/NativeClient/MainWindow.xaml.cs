@@ -44,7 +44,7 @@ public partial class MainWindow : Window
             }
             WebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = true;
             WebView.CoreWebView2.Settings.AreDevToolsEnabled = true;
-            WebView.Source = new Uri(host.BaseUrl);
+            WebView.Source = new Uri(host.LaunchUrl);
             Title = $"DeepSeek Harness · {host.BaseUrl}";
         }
         catch (Exception ex)
@@ -113,7 +113,7 @@ public partial class MainWindow : Window
                 UpdateProgressFill.Width = UpdateBar.ActualWidth - 200;
 
                 await host.RestartAsync();
-                WebView.Source = new Uri(host.BaseUrl);
+                WebView.Source = new Uri(host.LaunchUrl);
                 Title = $"DeepSeek Harness · {host.BaseUrl}";
 
                 UpdateBar.Visibility = Visibility.Collapsed;

@@ -13,7 +13,7 @@
  * Only lib/, config/ and package.json of the dsh package itself are swapped —
  * the shell (оболочка), node_modules and user data are never touched.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync, cpSync, createWriteStream } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync, cpSync, renameSync, createWriteStream } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
@@ -22,7 +22,7 @@ import https from "node:https";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const GH_REPO = "deepseek-ai/deepseek-harness";
-const NPM_META = "https://registry.npmjs.org/@deepseek-ai/dsh/latest";
+const NPM_META = "https://registry.npmjs.org/@deepseek-ai/dsh";
 const UA = "dsh-plugin-updater/1.1";
 
 // ── Locate the dsh package root ──────────────────────────────────────────
@@ -126,6 +126,22 @@ function download(url, dest, redirects = 5) {
 }
 
 // ── Update check: GitHub releases first, npm registry as fallback ────────
+function compareSemver(a, b) {
+  const parse = (version) => {
+    const [core, pre = ""] = version.split("-", 2);
+    return { parts: core.split(".").map(Number), pre: pre.split(".") };
+  };
+  const left = parse(a);
+  const right = parse(b);
+  for (let i = 0; i < 3; i++) {
+    const difference = (left.parts[i] || 0) - (right.parts[i] || 0);
+    if (difference) return difference;
+  }
+  if (!left.pre[0]) return right.pre[0] ? 1 : 0;
+  if (!right.pre[0]) return -1;
+  return a.localeCompare(b, "en", { numeric: true });
+}
+
 async function checkForUpdate() {
   const installed = installedVersion();
   let latest = null;
@@ -145,9 +161,11 @@ async function checkForUpdate() {
   if (!latest || !downloadUrl) {
     // No usable GitHub release — use the official npm distribution.
     const meta = await getJSON(NPM_META);
-    latest = latest || meta.version;
-    downloadUrl = meta.dist?.tarball || `https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-${latest}.tgz`;
-    source = source || "npm";
+    latest = Object.keys(meta.versions || {}).filter((version) => /^\d+\.\d+\.\d+/.test(version))
+      .sort(compareSemver).at(-1) || meta["dist-tags"]?.latest;
+    downloadUrl = meta.versions?.[latest]?.dist?.tarball
+      || `https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-${latest}.tgz`;
+    source = "npm";
   }
   return { installed, latest, changelog, downloadUrl, source };
 }

@@ -92,12 +92,75 @@ public static class DshUpdater
         try
         {
             using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(15) };
-            var json = await http.GetStringAsync("https://registry.npmjs.org/@deepseek-ai/dsh/latest");
+            // npm "latest" tag may lag behind prerelease versions (e.g. latest=rc.1 while rc.2 is out).
+            // Fetch the full version list and pick the highest one so we never miss a newer release.
+            var json = await http.GetStringAsync("https://registry.npmjs.org/@deepseek-ai/dsh");
             using var doc = JsonDocument.Parse(json);
-            if (doc.RootElement.TryGetProperty("version", out var v)) latest = v.GetString();
+            if (doc.RootElement.TryGetProperty("versions", out var versions))
+            {
+                string? best = null;
+                foreach (var prop in versions.EnumerateObject())
+                {
+                    var ver = prop.Name;
+                    // Skip local/linked versions
+                    if (ver.StartsWith("0.0.0-") || ver.Contains("+")) continue;
+                    if (best == null || CompareSemver(ver, best) > 0)
+                        best = ver;
+                }
+                latest = best;
+            }
+            // Fallback: if full listing is too large or fails, use the "latest" tag
+            if (latest == null && doc.RootElement.TryGetProperty("dist-tags", out var tags)
+                && tags.TryGetProperty("latest", out var tag))
+            {
+                latest = tag.GetString();
+            }
         }
         catch { /* offline */ }
+        if (installed != null && latest != null && CompareSemver(latest, installed) <= 0)
+            latest = null;
         return (installed, latest);
+    }
+
+    /// <summary>Simple semver comparator: returns >0 if a>b, <0 if a&lt;b, 0 if equal.</summary>
+    private static int CompareSemver(string a, string b)
+    {
+        var pa = ParseSemver(a);
+        var pb = ParseSemver(b);
+        int c = pa.Major.CompareTo(pb.Major); if (c != 0) return c;
+        c = pa.Minor.CompareTo(pb.Minor); if (c != 0) return c;
+        c = pa.Patch.CompareTo(pb.Patch); if (c != 0) return c;
+        // Pre-release: absence > presence (stable beats prerelease)
+        if (string.IsNullOrEmpty(pa.Pre) && string.IsNullOrEmpty(pb.Pre)) return 0;
+        if (string.IsNullOrEmpty(pa.Pre)) return 1;   // stable > prerelease
+        if (string.IsNullOrEmpty(pb.Pre)) return -1;
+        var left = pa.Pre.Split('.');
+        var right = pb.Pre.Split('.');
+        for (var i = 0; i < Math.Max(left.Length, right.Length); i++)
+        {
+            if (i >= left.Length) return -1;
+            if (i >= right.Length) return 1;
+            var leftNumber = int.TryParse(left[i], out var ln);
+            var rightNumber = int.TryParse(right[i], out var rn);
+            if (leftNumber && rightNumber) c = ln.CompareTo(rn);
+            else if (leftNumber) c = -1;
+            else if (rightNumber) c = 1;
+            else c = string.Compare(left[i], right[i], StringComparison.Ordinal);
+            if (c != 0) return c;
+        }
+        return 0;
+    }
+
+    private static (int Major, int Minor, int Patch, string Pre) ParseSemver(string v)
+    {
+        var dash = v.IndexOf('-');
+        var core = dash >= 0 ? v[..dash] : v;
+        var pre = dash >= 0 ? v[(dash + 1)..] : "";
+        var parts = core.Split('.');
+        int.TryParse(parts.ElementAtOrDefault(0), out var maj);
+        int.TryParse(parts.ElementAtOrDefault(1), out var min);
+        int.TryParse(parts.ElementAtOrDefault(2), out var pat);
+        return (maj, min, pat, pre);
     }
 
     /// <summary>
@@ -157,6 +220,35 @@ public static class DshUpdater
 
             var pkgDir = Path.Combine(stage, "package");
 
+            // 2a. Strip devDependencies from the extracted package.json to reduce
+            //     what npm must resolve (faster install, fewer 404 misses).
+            try
+            {
+                var pkgJsonPath = Path.Combine(pkgDir, "package.json");
+                var pkgText = File.ReadAllText(pkgJsonPath);
+                using var pkgDoc = JsonDocument.Parse(pkgText);
+                if (pkgDoc.RootElement.TryGetProperty("devDependencies", out _))
+                {
+                    var obj = pkgDoc.RootElement.Clone();
+                    // Remove the property by re-serializing without it
+                    var opts = new JsonSerializerOptions { WriteIndented = true };
+                    using var ms = new MemoryStream();
+                    using (var writer = new Utf8JsonWriter(ms))
+                    {
+                        writer.WriteStartObject();
+                        foreach (var prop in obj.EnumerateObject())
+                        {
+                            if (prop.Name != "devDependencies")
+                                prop.WriteTo(writer);
+                        }
+                        writer.WriteEndObject();
+                    }
+                    File.WriteAllBytes(pkgJsonPath, ms.ToArray());
+                    Log("devDependencies stripped from package.json");
+                }
+            }
+            catch (Exception ex) { Log($"devDependencies strip failed (continuing): {ex.Message}"); }
+
             // 4. Swap bundle. Fast path: dependencies unchanged → swap only
             //    lib/config/package.json. Full path: dependencies changed →
             //    replace the whole bundle (fresh node_modules) with rollback backup.
@@ -193,23 +285,27 @@ public static class DshUpdater
             }
             else
             {
-                // 3a. PRE-FLIGHT: resolve the dependency tree without touching
-                //     anything (npm --dry-run). Official releases sometimes ship
-                //     with unpublished deps (0.1.2-rc.1 → dsh-experimental-agent-team
-                //     404) — such releases must be rejected BEFORE we stop the
-                //     harness or modify a single file.
+                // 3a. PRE-FLIGHT: clean npm cache to avoid stale 404 entries, then
+                //     resolve the dependency tree without touching anything (npm --dry-run).
+                //     Official releases sometimes ship with unpublished deps — such
+                //     releases must be rejected BEFORE we stop the harness or touch files.
+                progress?.Report(new("Очистка кэша npm...", 32));
+                Log("Pre-flight: npm cache clean");
+                await RunProcessAsync(NpmCmd, "cache clean --force",
+                    pkgDir, TimeSpan.FromMinutes(2), ct);
+
                 progress?.Report(new("Проверка целостности релиза...", 35));
                 Log("Pre-flight: npm install --dry-run (resolve-only)");
                 var preExit = await RunProcessAsync(NpmCmd,
                     "install --dry-run --ignore-scripts --no-audit --no-fund --no-progress --prefer-offline",
-                    pkgDir, TimeSpan.FromMinutes(4), ct);
+                    pkgDir, TimeSpan.FromMinutes(8), ct);
                 Log($"pre-flight exit={preExit}");
                 if (preExit != 0)
                 {
                     var missing = LastNpmOutput.FirstOrDefault(l =>
                         l.Contains("E404") || l.Contains("could not be found"), "");
                     LastError = string.IsNullOrEmpty(missing)
-                        ? "Официальный релиз 0.1.2… повреждён: зависимости не разрешаются в npm. Обновление отменено, ваша версия не тронута."
+                        ? "Официальный релиз повреждён: зависимости не разрешаются в npm. Обновление отменено, ваша версия не тронута."
                         : $"Официальный релиз повреждён: {missing.Trim()} — пакета нет в npm. Обновление отменено, ваша версия не тронута.";
                     Log("pre-flight FAILED — release rejected, harness left running");
                     return false;
@@ -234,19 +330,32 @@ public static class DshUpdater
                     {
                         while (await creepTimer.WaitForNextTickAsync(ct))
                         {
-                            if (creep < 74) creep += 2;
+                            if (creep < 74) creep += 1;
                             progress?.Report(new("Установка зависимостей (может занять несколько минут)...", creep));
                         }
                     }
                     catch (OperationCanceledException) { }
                     catch (ObjectDisposedException) { }
                 });
-                int exit;
+                int exit = -1;
+                const int maxAttempts = 3;
                 try
                 {
-                    exit = await RunProcessAsync(NpmCmd,
-                        "install --omit=dev --no-audit --no-fund --no-progress --prefer-offline --maxsockets=16",
-                        pkgDir, TimeSpan.FromMinutes(10), ct);
+                    for (int attempt = 1; attempt <= maxAttempts; attempt++)
+                    {
+                        if (attempt > 1)
+                        {
+                            progress?.Report(new($"Повтор попытки ({attempt}/{maxAttempts})...", 45));
+                            Log($"npm install retry attempt {attempt}/{maxAttempts}");
+                            await RunProcessAsync(NpmCmd, "cache clean --force",
+                                pkgDir, TimeSpan.FromMinutes(2), ct);
+                        }
+                        exit = await RunProcessAsync(NpmCmd,
+                            "install --omit=dev --no-audit --no-fund --no-progress --prefer-offline --maxsockets=16",
+                            pkgDir, TimeSpan.FromMinutes(15), ct);
+                        if (exit == 0) break;
+                        Log($"npm install attempt {attempt} failed with exit={exit}");
+                    }
                 }
                 finally
                 {
@@ -254,7 +363,7 @@ public static class DshUpdater
                     try { await creepTask; } catch { }
                 }
                 Log($"npm install exit={exit}");
-                if (exit != 0) throw new Exception($"npm install failed with code {exit}");
+                if (exit != 0) throw new Exception($"npm install failed with code {exit} after {maxAttempts} attempts");
 
                 progress?.Report(new("Замена файлов...", 78));
                 BackupBundleFull();

@@ -104,6 +104,17 @@ if ($InstallStartup) {
     Write-Host "Автозапуск включён: $shortcutPath"
 }
 
+# The native shell starts Harness itself and opens its one-time authenticated
+# launch URL. Starting Harness here first would consume the port without giving
+# the native shell access to that URL.
+if (-not $NoBrowser) {
+    $nativeExe = Join-Path $PSScriptRoot 'NativeClient\DeepSeekHarness.Native.exe'
+    if (Test-Path $nativeExe) {
+        Start-Process -FilePath $nativeExe -WorkingDirectory (Split-Path $nativeExe)
+        exit 0
+    }
+}
+
 $createdNew = $false
 $mutex = New-Object System.Threading.Mutex($true, $MutexName, [ref]$createdNew)
 if (-not $createdNew) {

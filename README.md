@@ -1,7 +1,7 @@
 <p align="center"><img src="./assets/leostrange-project-banner.svg" alt="DeepSeek Harness Desktop RU" width="100%" /></p>
 
 <p align="center">
-  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.1.0"><img src="https://img.shields.io/badge/Release-v1.1.0-7C3AED?style=flat-square" alt="Release" /></a>
+  <a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.3.0"><img src="https://img.shields.io/badge/Release-v1.3.0-7C3AED?style=flat-square" alt="Release" /></a>
   <img src="https://img.shields.io/badge/Windows-10%2F11-0078D4?style=flat-square&logo=windows&logoColor=white" alt="Windows" />
   <img src="https://img.shields.io/badge/Language-Russian-22D3EE?style=flat-square" alt="Russian UI" />
   <img src="https://img.shields.io/badge/Community-project-64748B?style=flat-square" alt="Community project" />
@@ -9,9 +9,9 @@
 
 <p align="center"><b>Windows-клиент DeepSeek Harness с русской локализацией и автоматической подготовкой окружения.</b></p>
 
-<p align="center"><a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.1.0"><b>Скачать v1.1.0</b></a> · <a href="#быстрый-старт">Быстрый старт</a> · <a href="#видеодемонстрация">Видео установки</a></p>
+<p align="center"><a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.3.0"><b>Скачать v1.3.0</b></a> · <a href="#быстрый-старт">Быстрый старт</a> · <a href="#видеодемонстрация">Видео установки</a></p>
 
-<p align="center"><a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.1.0"><img src="./media/deepseek-harness-chat.jpg" alt="DeepSeek Harness Desktop RU interface" width="900" /></a></p>
+<p align="center"><a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.3.0"><img src="./media/deepseek-harness-chat.jpg" alt="DeepSeek Harness Desktop RU interface" width="900" /></a></p>
 
 ---
 
@@ -23,7 +23,14 @@
 
 > **Независимый community-проект.** Не является официальным продуктом DeepSeek и не аффилирован с DeepSeek.
 
-## Что нового в v1.1.0
+## Что нового в v1.3.0
+
+- **DeepSeek Harness `0.1.7-rc.2`.** Офлайн-бандл обновлён до актуального официального prerelease из канала `next`.
+- **Совместимая русская локализация.** Патчер поддерживает новый каталог языков Harness `0.1.7` и сохраняет английский как fallback для ещё не переведённых строк.
+- **Корректный поиск prerelease-обновлений.** Desktop сравнивает все опубликованные версии npm и не зависит от отстающего тега `latest`.
+- **Обновлённый browse-picker.** Windows-патч выбора рабочей области проверен на Harness `0.1.7-rc.2`.
+
+### Изменения v1.1.0
 
 - **Проверка целостности релизов DeepSeek Harness.** Перед обновлением оболочка делает pre-flight-проверку зависимостей новой версии в npm. Повреждённые официальные релизы (как `0.1.2-rc.1`, где зависимость `@deepseek-ai/dsh-experimental-agent-team` отсутствует в npm) отклоняются с точным диагнозом — приложение продолжает работать на текущей версии, ничего не ломается.
 - **Умное обновление Harness из оболочки.** Панель обновления с прогрессом: скачивание по байтам, ползущий прогресс на стадии зависимостей, русификация и ярлыки сохраняются автоматически.
@@ -52,12 +59,12 @@
 | **Native-пакет** | Отдельная native-сборка для соответствующего сценария. |
 | **Умное обновление** | Встроенная панель обновляет Harness из самой оболочки: проверка релизов, прогресс, авто-откат. |
 | **Browse-picker** | Встроенный файловый браузер вместо нативного Win32-диалога — работает без koffi/COM. |
-| **Проверка подписи** | В релиз входит `DeepSeekHarness-CodeSigning.cer`. |
+| **Контрольные суммы** | В релиз входит `SHA256SUMS.txt` для проверки загрузки. |
 | **Оригинальный Harness** | Сохраняются сессии, модели, плагины, пресеты и настройки. |
 
 ## Быстрый старт
 
-1. Откройте [релиз v1.1.0](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.1.0).
+1. Откройте [релиз v1.3.0](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.3.0).
 2. Скачайте `DeepSeekHarness-Setup.exe`.
 3. Запустите установщик и пройдите мастер установки.
 4. Клиент подготовит окружение, запустит локальный Harness и подключится к `http://127.0.0.1:3080`.
@@ -68,9 +75,8 @@
 
 | Файл | Назначение |
 |---|---|
-| [`DeepSeekHarness-Setup.exe`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.1.0/DeepSeekHarness-Setup.exe) | Рекомендуемый установщик. |
-| [`DeepSeekHarness-Distribution.zip`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.1.0/DeepSeekHarness-Distribution.zip) | Distribution / portable-сборка. |
-| [`DeepSeekHarness-CodeSigning.cer`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.1.0/DeepSeekHarness-CodeSigning.cer) | Сертификат для проверки подписи. |
+| [`DeepSeekHarness-Setup.exe`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.3.0/DeepSeekHarness-Setup.exe) | Рекомендуемый установщик. |
+| [`DeepSeekHarness-Distribution.zip`](https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/download/v1.3.0/DeepSeekHarness-Distribution.zip) | Distribution / portable-сборка. |
 
 ## Интерфейс
 
@@ -91,12 +97,11 @@
 ## SHA-256
 
 ```text
-3d4684e7e969b7bbce76ca8249e24454e2951e1218faf6b7321ce9795db9670c  DeepSeekHarness-Setup.exe
-e64e323bd1e950e6fe19c698bcd173a3132af61b72388908334940023d70d1a4  DeepSeekHarness-Distribution.zip
-73468508aba59723b2d8e054dc75e70b7c6ccef762b9a278832a955bd8705a19  DeepSeekHarness-CodeSigning.cer
+7d378971b0b147e73493c2d44c6c4e23fbcb7f4ce0910ac65630a4876419befd  DeepSeekHarness-Setup.exe
+475bd9d20c2faa7cda1ed9726fc51a65b4dba9de5b15482bc6683b1d349b37b4  DeepSeekHarness-Distribution.zip
 ```
 
-Перед использованием в рабочей среде рекомендуется проверить подпись, SHA-256 и совместимость с целевой версией Windows.
+Перед использованием в рабочей среде рекомендуется проверить SHA-256 и совместимость с целевой версией Windows. Установщик v1.3.0 не подписан цифровой подписью.
 
 ---
 
@@ -106,11 +111,11 @@ e64e323bd1e950e6fe19c698bcd173a3132af61b72388908334940023d70d1a4  DeepSeekHarnes
 
 The installer prepares the local runtime automatically. If Node.js is missing, it installs the required environment and launches local Harness at `127.0.0.1:3080`.
 
-**Highlights:** Windows desktop experience · automatic local connection · Russian UI · automatic Node.js setup · installer + portable/native packages · code-signing certificate.
+**Highlights:** Windows desktop experience · automatic local connection · Russian UI · automatic Node.js setup · installer + portable package · SHA-256 checksums.
 
 > Independent community project. Not affiliated with or endorsed by DeepSeek.
 
-<p align="center"><a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.1.0"><b>Download DeepSeek Harness Desktop RU v1.1.0</b></a></p>
+<p align="center"><a href="https://github.com/Leostrange/DeepSeek-Harness-Desktop-RU/releases/tag/v1.3.0"><b>Download DeepSeek Harness Desktop RU v1.3.0</b></a></p>
 
 ---
 

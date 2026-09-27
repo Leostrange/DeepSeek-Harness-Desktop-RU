@@ -30,7 +30,14 @@ $installed = (Get-Content (Join-Path $HarnessDir 'package.json') -Raw | ConvertF
 Log "installed=$installed"
 
 try {
-    $latest = (Invoke-RestMethod -Uri 'https://registry.npmjs.org/@deepseek-ai/dsh/latest' -TimeoutSec 30).version
+    $tags = (Invoke-RestMethod -Uri 'https://registry.npmjs.org/-/package/@deepseek-ai%2Fdsh/dist-tags' -TimeoutSec 30)
+    $latest = $tags.latest
+    $next = $tags.next
+    if ($next) {
+        $latestCore = [version](($latest -split '-')[0])
+        $nextCore = [version](($next -split '-')[0])
+        if ($nextCore -gt $latestCore) { $latest = $next }
+    }
 } catch {
     Log "registry check failed: $($_.Exception.Message)"
     Write-Error 'Cannot reach the npm registry. Check your connection.'

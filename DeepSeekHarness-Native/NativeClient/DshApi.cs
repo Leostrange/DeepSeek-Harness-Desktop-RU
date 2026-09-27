@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,8 +13,10 @@ public sealed class DshHost : IDisposable
 {
     public int Port { get; }
     public string BaseUrl => $"http://127.0.0.1:{Port}";
+    public string LaunchUrl => launchUrl ?? BaseUrl;
     private readonly string dataHome;
     private Process? process;
+    private volatile string? launchUrl;
     private readonly List<string> stderrTail = new();
 
     private static string InstallRoot
@@ -40,7 +43,12 @@ public sealed class DshHost : IDisposable
         await ApplyRussianPatchAsync();
         ApplyBrowsePickerPatch();
 
-        if (await IsReadyAsync(cancellationToken)) return;
+        if (await IsReadyAsync(cancellationToken))
+        {
+            if (await RequiresLaunchTokenAsync(cancellationToken))
+                throw new InvalidOperationException("На этом порту уже работает DeepSeek Harness с защитой входа. Закройте его и запустите Desktop снова.");
+            return;
+        }
 
         // Offline bundle ships as <install>/harness/node_modules/@deepseek-ai/dsh;
         // fall back to `npx @deepseek-ai/dsh` when it is absent.
@@ -74,7 +82,7 @@ public sealed class DshHost : IDisposable
             psi.Environment["DSH_BUNDLE_DIR"] = Path.GetFullPath(Path.Combine(
                 InstallRoot, "harness", "node_modules", "@deepseek-ai", "dsh"));
         process = Process.Start(psi) ?? throw new InvalidOperationException("Не удалось запустить DeepSeek Harness.");
-        _ = DrainAsync(process.StandardOutput);
+        _ = CollectLaunchUrlAsync(process.StandardOutput);
         _ = CollectAsync(process.StandardError, stderrTail);
         for (var i = 0; i < 60; i++)
         {
@@ -88,7 +96,17 @@ public sealed class DshHost : IDisposable
                 throw new InvalidOperationException(
                     $"DeepSeek Harness завершился во время запуска (код {process.ExitCode}).{details}");
             }
-            if (await IsReadyAsync(cancellationToken)) return;
+            if (await IsReadyAsync(cancellationToken))
+            {
+                if (await RequiresLaunchTokenAsync(cancellationToken))
+                {
+                    for (var wait = 0; wait < 20 && launchUrl is null; wait++)
+                        await Task.Delay(250, cancellationToken);
+                    if (launchUrl is null)
+                        throw new InvalidOperationException("Harness запущен, но не сообщил URL для входа.");
+                }
+                return;
+            }
         }
         throw new TimeoutException("DeepSeek Harness не открыл локальный порт за 30 секунд.");
     }
@@ -99,6 +117,7 @@ public sealed class DshHost : IDisposable
         try { if (process is { HasExited: false }) process.Kill(entireProcessTree: true); } catch { }
         process?.Dispose();
         process = null;
+        launchUrl = null;
         stderrTail.Clear();
         await StartAsync(ct);
     }
@@ -215,9 +234,32 @@ public sealed class DshHost : IDisposable
         return File.Exists(bundled) ? bundled : "node.exe";
     }
 
-    private static async Task DrainAsync(StreamReader reader)
+    private async Task CollectLaunchUrlAsync(StreamReader reader)
     {
-        try { while (await reader.ReadLineAsync() is not null) { } } catch { }
+        try
+        {
+            while (await reader.ReadLineAsync() is { } line)
+            {
+                if (!line.StartsWith("dsh web: ", StringComparison.Ordinal)) continue;
+                var candidate = line["dsh web: ".Length..].Trim();
+                if (Uri.TryCreate(candidate, UriKind.Absolute, out var uri)
+                    && uri.Host == "127.0.0.1" && uri.Port == Port
+                    && uri.Query.Contains("token=", StringComparison.Ordinal))
+                    launchUrl = uri.ToString();
+            }
+        }
+        catch { }
+    }
+
+    private async Task<bool> RequiresLaunchTokenAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(2) };
+            using var response = await client.GetAsync(BaseUrl, cancellationToken);
+            return response.StatusCode == HttpStatusCode.Unauthorized;
+        }
+        catch { return false; }
     }
 
     /// <summary>Drains a stream while keeping the last lines for diagnostics.</summary>
