@@ -1,8 +1,10 @@
 # DeepSeek Harness
 
-English | [中文](README.zh.md)
+<p align="center"><a href="README-RU.md"><img src="./assets/leostrange-project-banner.svg" alt="DeepSeek Harness Desktop RU" width="100%" /></a></p>
 
-[Русский: Desktop fork](README-RU.md)
+The [Russian Windows Desktop edition](README-RU.md) includes the current installer, screenshots, and a video demonstration.
+
+English | [中文](README.zh.md)
 
 DeepSeek Harness (`dsh`) is an open-source agent harness developed by [DeepSeek AI](https://deepseek.com).
 
