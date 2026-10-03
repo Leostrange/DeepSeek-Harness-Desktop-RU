@@ -5,7 +5,8 @@
     "outDir": "lib/types"
   },
   "include": [
-    "src"
+    "src",
+    "src/**/*.json"
   ],
   "references": [
     {

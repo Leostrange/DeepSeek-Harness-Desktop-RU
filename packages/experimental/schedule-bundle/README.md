@@ -41,7 +41,7 @@ Open Plugins in the Web sidebar and enable Automation tasks, marked by an alarm 
 |---|---|
 | [`cordis.patch.yml`](cordis.patch.yml) | Inserts the `time-context`, `schedule`, and `ui-schedule` rows |
 | [`package.json`](package.json) | The row packages as dependencies |
-| [`locale/en.json`](locale/en.json), [`locale/zh.json`](locale/zh.json) | Plugin-manager title and description |
+| [`locale/en.json`](locale/en.json), [`locale/ru.json`](locale/ru.json), [`locale/zh.json`](locale/zh.json) | Plugin-manager title and description |
 | [`icon.svg`](icon.svg) | Plugin-manager icon |
 | [`src/index.ts`](src/index.ts) | Empty module entry; the patch is the runtime content |
 

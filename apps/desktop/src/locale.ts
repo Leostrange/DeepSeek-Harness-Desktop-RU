@@ -1,4 +1,7 @@
-/** Typed English and Chinese copy owned by the Electron shell. */
+/** Typed copy owned by the Electron shell. */
+import { ru } from './locale-ru.ts'
+
+export { ru } from './locale-ru.ts'
 
 export const en = {
   cliCommandMenu: 'Manage dsh Command…',
@@ -170,6 +173,7 @@ export const en = {
 
 /** Every Desktop locale supplies the complete English key set. */
 export type DesktopMessages = { readonly [Key in keyof typeof en]: string }
+const ruMessages: DesktopMessages = ru
 
 export const zh = {
   cliCommandMenu: '管理 dsh 命令…',
@@ -341,15 +345,16 @@ export const zh = {
 
 /** Locale payload exposed to the Desktop-owned renderer. */
 export interface DesktopLocale {
-  readonly id: 'en' | 'zh-CN'
+  readonly id: 'en' | 'zh-CN' | 'ru'
   readonly messages: DesktopMessages
 }
 
 /** Resolve Electron's locale to one shipped Desktop dictionary. */
 export function resolveDesktopLocale(locale: string): DesktopLocale {
-  return locale.toLowerCase().startsWith('zh')
-    ? { id: 'zh-CN', messages: zh }
-    : { id: 'en', messages: en }
+  const id = locale.toLowerCase()
+  if (id.startsWith('zh')) return { id: 'zh-CN', messages: zh }
+  if (id.startsWith('ru')) return { id: 'ru', messages: ruMessages }
+  return { id: 'en', messages: en }
 }
 
 /**
@@ -360,10 +365,10 @@ export function resolveDesktopLocale(locale: string): DesktopLocale {
  */
 export function resolveDesktopStartupLocale(preference: string | null, languages: readonly string[]): DesktopLocale {
   const selected = preference?.toLowerCase()
-  if (selected === 'zh' || selected === 'en') return resolveDesktopLocale(selected)
+  if (selected === 'zh' || selected === 'en' || selected === 'ru') return resolveDesktopLocale(selected)
   for (const language of languages) {
     const primary = language.toLowerCase().split('-')[0]
-    if (primary === 'zh' || primary === 'en') return resolveDesktopLocale(primary)
+    if (primary === 'zh' || primary === 'en' || primary === 'ru') return resolveDesktopLocale(primary)
   }
   return resolveDesktopLocale('en')
 }

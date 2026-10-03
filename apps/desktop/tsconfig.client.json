@@ -7,7 +7,8 @@
   "include": [
     "src/client",
     "src/welcome-api.ts",
-    "src/locale.ts"
+    "src/locale.ts",
+    "src/locale-ru.ts"
   ],
   "references": [
     {

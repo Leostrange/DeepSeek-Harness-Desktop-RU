@@ -41,7 +41,7 @@ kind: "package-bundle"
 |---|---|
 | [`cordis.patch.yml`](cordis.patch.yml) | 插入 `time-context`、`schedule` 与 `ui-schedule` 三个条目 |
 | [`package.json`](package.json) | 以依赖声明这些条目的包 |
-| [`locale/en.json`](locale/en.json)、[`locale/zh.json`](locale/zh.json) | 插件管理页的标题与描述 |
+| [`locale/en.json`](locale/en.json)、[`locale/ru.json`](locale/ru.json)、[`locale/zh.json`](locale/zh.json) | 插件管理页的标题与描述 |
 | [`icon.svg`](icon.svg) | 插件管理页图标 |
 | [`src/index.ts`](src/index.ts) | 空的模块入口；补丁即运行时内容 |
 

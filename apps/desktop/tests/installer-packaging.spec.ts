@@ -75,6 +75,15 @@ describe('installer preparation preserves application dependencies', () => {
       DSH_DESKTOP_UNSIGNED: '1',
     }, 'win32', 'x64')
     expect(config.artifactName).toBe('deepseek-harness-${version}-${os}-${arch}-unsigned.${ext}')
+    expect(config.nsis.installerLanguages).toEqual(['en_US', 'zh_CN', 'ru_RU'])
+  })
+
+  it('provides Russian copy for every custom installer message', () => {
+    const source = readFileSync(new URL('../installer/strings.nsh', import.meta.url), 'utf8')
+    const keys = (language: string): string[] => [...source.matchAll(/^LangString (\S+) \$\{LANG_(\w+)\}/gmu)]
+      .filter(match => match[2] === language).map(match => match[1]!).sort()
+    expect(keys('RUSSIAN')).toEqual(keys('ENGLISH'))
+    expect(keys('RUSSIAN')).toHaveLength(28)
   })
 
   it('packages every preload entry point the shell loads', async () => {

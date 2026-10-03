@@ -1,0 +1,1150 @@
+{
+  "@deepseek-ai/dsh": {
+    "en": "dsh CLI: profile launch, plugin management, and configuration inspection",
+    "ru": "dsh CLI: запуск профиля, управление плагинами и проверка конфигурации"
+  },
+  "@deepseek-ai/cordis": {
+    "en": "Meta-Framework for Modern JavaScript Applications",
+    "ru": "Метафреймворк для современных приложений JavaScript"
+  },
+  "@deepseek-ai/cordis-plugin-group": {
+    "en": "Nested plugin group for cordis",
+    "ru": "Вложенная группа плагинов для Cordis"
+  },
+  "@deepseek-ai/cordis-plugin-include": {
+    "en": "Include files in cordis configurations",
+    "ru": "Включение файлов в конфигурации Cordis"
+  },
+  "@deepseek-ai/cordis-plugin-loader": {
+    "en": "Plugin loader for cordis",
+    "ru": "Плагин загрузчик для Cordis"
+  },
+  "@deepseek-ai/cordis-plugin-timer": {
+    "en": "Timer service for cordis",
+    "ru": "Сервис таймера для Cordis"
+  },
+  "@deepseek-ai/cosmokit": {
+    "en": "A collection of common utilities",
+    "ru": "Сборник общих утилит"
+  },
+  "@deepseek-ai/dsh-acp": {
+    "en": "Automation-only Agent Client Protocol server for driving DeepSeek Harness agents over JSON-RPC stdio",
+    "ru": "Сервер агентного клиентского протокола, предназначенный только для автоматизации, для управления агентами DeepSeek Harness через JSON-RPC stdio."
+  },
+  "@deepseek-ai/dsh-acp-app": {
+    "en": "The dsh ACP profile bundle: automation-only JSON-RPC stdio and process lifecycle over dsh-base",
+    "ru": "Пакет профилей dsh ACP: стандартное JSON-RPC только для автоматизации и жизненный цикл процесса через dsh-base"
+  },
+  "@deepseek-ai/dsh-agent": {
+    "en": "Agent interface, registry, initiator scope, and event vocabulary for the DeepSeek Harness",
+    "ru": "Интерфейс агента, реестр, область инициатора и словарь событий для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-agent-default-model": {
+    "en": "Default model selection shared by Agent entry points",
+    "ru": "Выбор модели по умолчанию, общий для точек входа агента"
+  },
+  "@deepseek-ai/dsh-agent-instructions": {
+    "en": "Workspace context loader for AGENTS.md/CLAUDE.md instruction files",
+    "ru": "Загрузчик контекста рабочей области для файлов инструкций AGENTS.md/CLAUDE.md"
+  },
+  "@deepseek-ai/dsh-agent-loop": {
+    "en": "The concrete agent loop plugin for the DeepSeek Harness",
+    "ru": "Плагин конкретного агента для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-agent-preset": {
+    "en": "Declare an Agent capability composition in Cordis YAML",
+    "ru": "Объявить состав возможностей агента в Cordis YAML"
+  },
+  "@deepseek-ai/dsh-agent-preset-registry": {
+    "en": "Declarative Agent preset registry and profile-backed editing",
+    "ru": "Реестр предустановленных декларативных агентов и редактирование с использованием профиля"
+  },
+  "@deepseek-ai/dsh-agent-tool-presentation": {
+    "en": "Agent-plane presentation selector: composes one agent's tools as PTC mode, native, or both",
+    "ru": "Селектор представления плоскости агента: объединяет инструменты одного агента в режиме PTC, собственном или обоих."
+  },
+  "@deepseek-ai/dsh-anonymous-user-id": {
+    "en": "Shared anonymous user identity for DeepSeek Harness telemetry and feedback correlation",
+    "ru": "Общая анонимная личность пользователя для телеметрии DeepSeek Harness и корреляции обратной связи"
+  },
+  "@deepseek-ai/dsh-api-account-controller": {
+    "en": "Expose safe account operations over authenticated Remote",
+    "ru": "Предоставлять безопасные операции с учетной записью через аутентифицированный удаленный доступ"
+  },
+  "@deepseek-ai/dsh-api-gateway": {
+    "en": "Typert Remote Host dispatcher and Client API endpoint",
+    "ru": "Диспетчер удаленного хоста Typert и конечная точка клиентского API"
+  },
+  "@deepseek-ai/dsh-api-job-controller": {
+    "en": "Job Remote observation stream and the reference-counted client job-output service",
+    "ru": "Поток удаленного наблюдения за заданиями и клиентская служба вывода заданий с подсчетом ссылок"
+  },
+  "@deepseek-ai/dsh-api-remotes": {
+    "en": "Remote BFF assembly for application-selected Host capabilities",
+    "ru": "Удаленная сборка BFF для возможностей хоста, выбранного приложением"
+  },
+  "@deepseek-ai/dsh-api-session-controller": {
+    "en": "Session Remote commands, cold reads, and live control transport",
+    "ru": "Удалённые команды сеанса, чтение сохранённого состояния и передача команд управления в реальном времени"
+  },
+  "@deepseek-ai/dsh-api-settings-controller": {
+    "en": "Remote owner for the configuration surfaces over the settings-domain seams",
+    "ru": "Удаленный владелец конфигурационных поверхностей поверх швов домена настроек."
+  },
+  "@deepseek-ai/dsh-api-terminal-controller": {
+    "en": "Session-owned interactive terminals with shell discovery, screen recovery and typed Remote control",
+    "ru": "Интерактивные терминалы, принадлежащие сеансу, с обнаружением оболочки, восстановлением экрана и дистанционным управлением с помощью ввода."
+  },
+  "@deepseek-ai/dsh-api-workspace-controller": {
+    "en": "Workspace Remote commands and reconnect-safe state transport",
+    "ru": "Удаленные команды Workspace и транспортировка состояний с защитой от повторного подключения"
+  },
+  "@deepseek-ai/dsh-api-workspace-files": {
+    "en": "Workspace file service and Client resource provider: bounded reads, directory listing, and live metadata over the workspaceFiles Remote namespace",
+    "ru": "Файловая служба рабочей области и поставщик клиентских ресурсов: ограниченное чтение, список каталогов и оперативные метаданные в удаленном пространстве имен рабочей области."
+  },
+  "@deepseek-ai/dsh-app-boot": {
+    "en": "Shared boot glue for the app bins: .env loading, fail-loud Loader guards, snapshot-aware config resolution, and the Loader boot sequence",
+    "ru": "Общий модуль запуска приложений: загрузка .env, проверки загрузчика, разрешение конфигурации с учётом снимков состояния и запуск загрузчика"
+  },
+  "@deepseek-ai/dsh-atomic-write": {
+    "en": "Zero-dependency atomic file replacement: exclusive-create random-suffix temp + rename carrying the caller-stated permissions (writeFileAtomic)",
+    "ru": "Атомная замена файла с нулевой зависимостью: эксклюзивное создание временного суффикса со случайным суффиксом + переименование с учетом разрешений, указанных вызывающим абонентом (writeFileAtomic)."
+  },
+  "@deepseek-ai/dsh-attachment": {
+    "en": "Durable immutable attachment storage seam for the DeepSeek Harness",
+    "ru": "Интерфейс надёжного неизменяемого хранилища вложений DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-attachment-local": {
+    "en": "Private content-addressed DSH_HOME attachment storage",
+    "ru": "Частное хранилище вложений DSH_HOME с адресом контента"
+  },
+  "@deepseek-ai/dsh-authorization": {
+    "en": "Authorization seam (ctx.authorization): plugin-owned flows that obtain a credential through a conversation with the human",
+    "ru": "Интерфейс авторизации (ctx.authorization): плагины запрашивают учётные данные у пользователя в диалоге"
+  },
+  "@deepseek-ai/dsh-base": {
+    "en": "The shared dsh core as a profile bundle: the first patch layer of base-backed profiles, inserting core rows over the empty profile root",
+    "ru": "Общее ядро dsh как пакет профилей: первый слой исправлений базовых профилей, вставка основных строк поверх пустого корня профиля."
+  },
+  "@deepseek-ai/dsh-bash-local": {
+    "en": "Local-subprocess implementation of the DeepSeek Harness bash executor seam",
+    "ru": "Локальная реализация шва исполнителя bash DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-bash-sandbox": {
+    "en": "Sandbox-consuming implementation of the DeepSeek Harness bash executor seam (confines every command via ctx.sandbox, reports denial/enforcement result facts)",
+    "ru": "Реализация шва исполнителя bash DeepSeek Harness, использующая песочницу (ограничивает каждую команду через ctx.sandbox, сообщает о фактах результатов отказа/принуждения)"
+  },
+  "@deepseek-ai/dsh-brand": {
+    "en": "Stateless branded primitive types for the DeepSeek Harness",
+    "ru": "Фирменные примитивные типы без сохранения состояния для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-chunked-list": {
+    "en": "Persistent append-only chunked lists with bounded copying and JSON checkpoint validation",
+    "ru": "Постоянные фрагментированные списки, доступные только для добавления, с ограниченным копированием и проверкой контрольной точки JSON."
+  },
+  "@deepseek-ai/dsh-client-connection": {
+    "en": "Authenticated RPC transport and generation lifecycle",
+    "ru": "Аутентифицированный жизненный цикл транспортировки и генерации RPC"
+  },
+  "@deepseek-ai/dsh-client-file-upload": {
+    "en": "Agent-scoped browser file upload, streaming intake, and staged receipt service",
+    "ru": "Загрузка файлов в браузере на уровне агента, потоковая передача и служба поэтапного получения"
+  },
+  "@deepseek-ai/dsh-client-hmr": {
+    "en": "Web client graph synchronization and rebuilt-bundle reload transport",
+    "ru": "Синхронизация графа веб-клиента и транспорт перезагрузки перестроенного пакета."
+  },
+  "@deepseek-ai/dsh-client-locale": {
+    "en": "Locale plugin: Host-backed preference, extensible language catalog, browser fallback, and typed built-in dictionaries",
+    "ru": "Плагин локали: настройки на основе хоста, расширяемый языковой каталог, резервный вариант браузера и встроенные типизированные словари."
+  },
+  "@deepseek-ai/dsh-client-modules": {
+    "en": "Client module system, dual-face: node half composes the __DSH_BOOT__ entry graph (incremental dsh.client scan, bundle route, index tap, webPlugins service); browser half is the lazy-CJS module table the vendored cordis Loader consumes as its internal seam",
+    "ru": "Система клиентских модулей, двусторонняя: половина узла составляет граф записей __DSH_BOOT__ (инкрементальное сканирование dsh.client, маршрутизация пакета, индексирование, служба webPlugins); Половина браузера — это таблица модулей lazy-CJS, которую поставщик Cordis Loader использует в качестве внутреннего шва."
+  },
+  "@deepseek-ai/dsh-client-resources": {
+    "en": "Unified client resource model: protocol-registered providers turn URL addresses into live values, consumed through the useResource global standard hook",
+    "ru": "Единая модель клиентских ресурсов: зарегистрированные в протоколе поставщики превращают URL-адреса в живые значения, потребляемые через глобальный стандартный хук useResource."
+  },
+  "@deepseek-ai/dsh-client-shortcuts": {
+    "en": "Application keyboard command registry and physical-key routing",
+    "ru": "Реестр команд клавиатуры приложения и маршрутизация физических ключей"
+  },
+  "@deepseek-ai/dsh-client-store": {
+    "en": "React-free observable and snapshot-store contracts with the shared Zustand/Immer engine",
+    "ru": "Наблюдаемые контракты и контракты с хранилищем снимков без реагирования на общий движок Zustand/Immer."
+  },
+  "@deepseek-ai/dsh-client-ui-agent-preset": {
+    "en": "Agent-preset surfaces: the default for later sessions, this session's seat, and the composition editor",
+    "ru": "Поверхности, заданные агентом: настройки по умолчанию для последующих сеансов, место этого сеанса и редактор композиции."
+  },
+  "@deepseek-ai/dsh-client-ui-approval": {
+    "en": "Approval composer takeover over the scoped Remote Event waterfall",
+    "ru": "Контроль композитора утверждения над каскадом удаленных событий с ограниченной областью действия"
+  },
+  "@deepseek-ai/dsh-client-ui-attachment": {
+    "en": "Dynamic attachment presentation plugin for conversation input, message-image, and trajectory image slots",
+    "ru": "Плагин динамического представления вложений для ввода разговора, изображений сообщений и слотов изображений траектории"
+  },
+  "@deepseek-ai/dsh-client-ui-brand-official": {
+    "en": "Official DeepSeek Harness brand occupants for the Web client's sidebar slots",
+    "ru": "Официальные фирменные элементы DeepSeek Harness для слотов боковой панели веб-клиента."
+  },
+  "@deepseek-ai/dsh-client-ui-chat": {
+    "en": "Chat Conversation target, node definitions, renderers, and details surface",
+    "ru": "Цель разговора в чате, определения узлов, средства визуализации и подробные сведения."
+  },
+  "@deepseek-ai/dsh-client-ui-commands": {
+    "en": "Client command surface: global directory cache, '/' source, three command UI kinds, popupSelect registry",
+    "ru": "Интерфейс клиентских команд: кеш глобального каталога, источник '/', три типа пользовательского интерфейса команд, реестр popupSelect."
+  },
+  "@deepseek-ai/dsh-client-ui-conversation": {
+    "en": "Target-neutral Conversation assembly, shell, composer, queue, and view navigation",
+    "ru": "Независимая от цели сборка диалога, оболочка, композитор, очередь и навигация по представлению"
+  },
+  "@deepseek-ai/dsh-client-ui-cordis": {
+    "en": "Cordis dynamic-plugin definition card: the keyed cordis_define tool row with its run/stop switch",
+    "ru": "Карта определения динамического плагина Cordis: строка инструмента cordis_define с ключом и переключателем запуска/останова."
+  },
+  "@deepseek-ai/dsh-client-ui-deliverables": {
+    "en": "Changed-files card with per-file comparison tabs, delivery cards, and clickable final-response file references for Web",
+    "ru": "Карточка измененных файлов с вкладками сравнения файлов, карточками доставки и интерактивными ссылками на файлы окончательного ответа для Интернета."
+  },
+  "@deepseek-ai/dsh-client-ui-directory-picker-browse": {
+    "en": "In-app directory browsing surface: the workspace directory-flow owner rendering the host's listing and creation primitives",
+    "ru": "Поверхность просмотра каталогов в приложении: владелец потока каталогов рабочей области, отображающий примитивы листинга и создания хоста."
+  },
+  "@deepseek-ai/dsh-client-ui-directory-picker-native": {
+    "en": "Native directory-picker surface: the renderless workspace directory-flow occupant driving the local Desktop or Host OS chooser",
+    "ru": "Собственная поверхность выбора каталогов: участник потока каталогов рабочей области без рендеринга, управляющий выбором локального рабочего стола или операционной системы хоста."
+  },
+  "@deepseek-ai/dsh-client-ui-goal": {
+    "en": "Session goal surface: GoalBar docked above the composer, read from the goal session projection",
+    "ru": "Панель цели сеанса над полем ввода; данные берутся из состояния цели текущего сеанса"
+  },
+  "@deepseek-ai/dsh-client-ui-input-trigger": {
+    "en": "Input trigger pipeline: '/' and '@' detection, candidate menu, pick routing to registered sources",
+    "ru": "Конвейер входных триггеров: обнаружение '/' и '@', меню кандидатов, выбор маршрутизации к зарегистрированным источникам"
+  },
+  "@deepseek-ai/dsh-client-ui-jobs": {
+    "en": "Session-header background-job list with on-demand streaming record panels",
+    "ru": "Список фоновых заданий в заголовке сеанса с панелями потоковой записи по требованию"
+  },
+  "@deepseek-ai/dsh-client-ui-layout": {
+    "en": "Shell plugin: three-column AppFrame with drag handles, ctx.layout viewing-state service (navigation + panels)",
+    "ru": "Плагин оболочки: трехколоночный AppFrame с маркерами перетаскивания, сервис состояния просмотра ctx.layout (навигация + панели)"
+  },
+  "@deepseek-ai/dsh-client-ui-message-feedback": {
+    "en": "The Web feedback surface: per-message Like/Dislike in the assistant-message action strip and the feedback dialog behind both ratings and /feedback, backed by the messageFeedback and sessionFeedback Host Remotes",
+    "ru": "Веб-интерфейс обратной связи: отметка «Нравится/Не нравится» для каждого сообщения в полосе действий помощника-сообщения и диалоговое окно обратной связи за оценками и /feedback, поддерживаемое сообщениями messageFeedback и sessionFeedback Host Remotes."
+  },
+  "@deepseek-ai/dsh-client-ui-model-selection": {
+    "en": "Model selection over the shared model catalog, Session projection, and session.selectModel",
+    "ru": "Выбор модели в общем каталоге моделей, проекции сеанса и session.selectModel."
+  },
+  "@deepseek-ai/dsh-client-ui-open-in-app": {
+    "en": "Web \"Open In...\" controls: the Session-header split button opening the workspace directory in an installed application, and the document preview's default-application controls for one file",
+    "ru": "Веб-элементы управления «Открыть в...»: разделенная кнопка заголовка сеанса, открывающая каталог рабочей области в установленном приложении, и элементы управления приложением по умолчанию для предварительного просмотра документа для одного файла."
+  },
+  "@deepseek-ai/dsh-client-ui-permission-presets": {
+    "en": "Permission surfaces: a new-session default in General settings and a current-session /permission popup over the permissions projection",
+    "ru": "Поверхности разрешений: значение по умолчанию для нового сеанса в общих настройках и всплывающее окно текущего сеанса/разрешений над проекцией разрешений."
+  },
+  "@deepseek-ai/dsh-client-ui-plan": {
+    "en": "Plan mode controls, persistent transcript plan cards, and sidebar Markdown previews",
+    "ru": "Элементы управления режимом планирования, постоянные карты плана стенограммы и предварительный просмотр Markdown на боковой панели."
+  },
+  "@deepseek-ai/dsh-client-ui-plugin-manager": {
+    "en": "Plugin management for the dsh web client: the sidebar Plugins panel installs, enables, disables, retries, and composes installed plugin packages",
+    "ru": "Управление плагинами для веб-клиента dsh: панель «Плагины» на боковой панели устанавливает, включает, отключает, повторяет попытки и формирует установленные пакеты плагинов."
+  },
+  "@deepseek-ai/dsh-client-ui-primitives": {
+    "en": "Pure React atoms for the dsh web UI: controls, icons, markdown, and JSON inspectors (zero cordis)",
+    "ru": "Атомы Pure React для веб-интерфейса dsh: элементы управления, значки, уценка и инспекторы JSON (ноль Cordis)"
+  },
+  "@deepseek-ai/dsh-client-ui-reference": {
+    "en": "Unified Web @file and @session reference source",
+    "ru": "Единый источник ссылок @file и @session в Интернете"
+  },
+  "@deepseek-ai/dsh-client-ui-renderer": {
+    "en": "Browser UI renderer: React slot bindings, ctx.uiRenderer, and the assembled application root",
+    "ru": "Средство визуализации пользовательского интерфейса браузера: привязки слотов React, ctx.uiRenderer и собранный корень приложения."
+  },
+  "@deepseek-ai/dsh-client-ui-schedule": {
+    "en": "Host task management page and Session reminder catalog",
+    "ru": "Страница управления задачами хоста и каталог напоминаний о сеансах"
+  },
+  "@deepseek-ai/dsh-client-ui-session": {
+    "en": "Session Controller adapter for React and session-scoped slots",
+    "ru": "Адаптер контроллера сеансов для React и слотов области сеанса"
+  },
+  "@deepseek-ai/dsh-client-ui-settings": {
+    "en": "Settings domain base plugin: shared configuration forms and the canonical settings slot-type contract",
+    "ru": "Плагин базы настроек домена: общие формы конфигурации и контракт типа слота канонических настроек"
+  },
+  "@deepseek-ai/dsh-client-ui-settings-account": {
+    "en": "Manage DeepSeek login and open Platform billing pages",
+    "ru": "Управляйте входом в DeepSeek и открывайте страницы выставления счетов на платформе."
+  },
+  "@deepseek-ai/dsh-client-ui-settings-agent-loop": {
+    "en": "Settings page of the agent loop on the dsh web client's Plugins page: the parallel tool-call cap of the agent-loop namespace",
+    "ru": "Страница настроек цикла агента на странице плагинов веб-клиента dsh: ограничение параллельного вызова инструментов пространства имен цикла агента."
+  },
+  "@deepseek-ai/dsh-client-ui-settings-general": {
+    "en": "Settings ownerless-copy and product onboarding plugin: the General section, shell trigger/header chrome content, settings dictionaries, and the versioned welcome notice",
+    "ru": "Плагин копирования настроек без владельца и адаптации продукта: раздел «Общие», содержимое триггера оболочки/заголовка Chrome, словари настроек и приветственное уведомление с указанием версий."
+  },
+  "@deepseek-ai/dsh-client-ui-settings-models": {
+    "en": "Models settings and shared product-onboarding dialogs over existing settings and credential joins",
+    "ru": "Настройки моделей и общие диалоговые окна внедрения продукта поверх существующих настроек и объединений учетных данных."
+  },
+  "@deepseek-ai/dsh-client-ui-settings-plugin-inventory": {
+    "en": "Read-only Cordis Loader inventory tab in Web Plugins settings",
+    "ru": "Вкладка инвентаря Cordis Loader только для чтения в настройках веб-плагинов"
+  },
+  "@deepseek-ai/dsh-client-ui-settings-plugins": {
+    "en": "Built-in plugins settings section for the dsh web client: the Settings navigation entry and the tab chrome feature-owned tabs register into",
+    "ru": "Раздел настроек встроенных плагинов для веб-клиента dsh: навигационная запись «Настройки» и вкладки, принадлежащие функциям Chrome, регистрируются в"
+  },
+  "@deepseek-ai/dsh-client-ui-settings-shell": {
+    "en": "Settings page of the shell executor on the dsh web client's Plugins page: the command timeout and the per-stream output cap of the shell namespace",
+    "ru": "Страница настроек исполнителя оболочки на странице плагинов веб-клиента dsh: время ожидания команды и ограничение вывода для каждого потока в пространстве имен оболочки."
+  },
+  "@deepseek-ai/dsh-client-ui-settings-subagent": {
+    "en": "Settings page of Subagent delegation on the dsh web client's Plugins page: recursion depth, parallel capacity, and the models agents may choose for subagents",
+    "ru": "Страница настроек делегирования субагента на странице плагинов веб-клиента dsh: глубина рекурсии, параллельная мощность и модели, которые агенты могут выбирать для субагентов."
+  },
+  "@deepseek-ai/dsh-client-ui-settings-web-search": {
+    "en": "Settings page of the DeepSeek web-search provider on the dsh web client's Plugins page: its API key, endpoint, and per-request search budget",
+    "ru": "Страница настроек провайдера веб-поиска DeepSeek на странице плагинов веб-клиента dsh: его ключ API, конечная точка и бюджет поиска для каждого запроса."
+  },
+  "@deepseek-ai/dsh-client-ui-shortcuts": {
+    "en": "Keyboard shortcut reference, recording, and local preference editing",
+    "ru": "Справочник по сочетаниям клавиш, записи и редактированию локальных предпочтений."
+  },
+  "@deepseek-ai/dsh-client-ui-sidebar": {
+    "en": "Sidebar plugin: session multi-level tree, search, grouping, state dots",
+    "ru": "Плагин боковой панели: многоуровневое дерево сессий, поиск, группировка, точки состояния"
+  },
+  "@deepseek-ai/dsh-client-ui-sidebar-browser": {
+    "en": "Sandboxed Web browser tabs for the right Sidebar",
+    "ru": "Вкладки изолированного веб-браузера для правой боковой панели"
+  },
+  "@deepseek-ai/dsh-client-ui-sidebar-documentpreview": {
+    "en": "Extensible Sidebar previews for Office documents, spreadsheets, Markdown, code, images, PDF, HTML, and plain text",
+    "ru": "Расширяемый предварительный просмотр на боковой панели документов Office, электронных таблиц, Markdown, кода, изображений, PDF, HTML и обычного текста."
+  },
+  "@deepseek-ai/dsh-client-ui-sidebar-files": {
+    "en": "Workspace file tree tab type for the right Sidebar: lazy directory listing over the workspaceFiles Remote namespace, opening files into the Sidebar",
+    "ru": "Тип вкладки дерева файлов рабочей области для правой боковой панели: ленивый список каталогов в удаленном пространстве имен WorkspaceFiles, открытие файлов на боковой панели."
+  },
+  "@deepseek-ai/dsh-client-ui-sidebar-right": {
+    "en": "Right Sidebar: the docking surface's session-bound state, its panel and header expand control, and the navigation service over it",
+    "ru": "Правая боковая панель: состояние привязываемой поверхности к сеансу, управление расширением ее панели и заголовка, а также служба навигации по ней."
+  },
+  "@deepseek-ai/dsh-client-ui-sidebar-terminal": {
+    "en": "Interactive shell tabs for the right Sidebar",
+    "ru": "Интерактивные вкладки оболочки для правой боковой панели"
+  },
+  "@deepseek-ai/dsh-client-ui-skill": {
+    "en": "Web skill references and the dedicated skill tool row",
+    "ru": "Ссылки на веб-навыки и строка специального инструмента для навыков"
+  },
+  "@deepseek-ai/dsh-client-ui-slots": {
+    "en": "Slot registry pure core: typed ordinary Slots and reusable Component Factories, derived props, Store seats, and renderer installation",
+    "ru": "Чистое ядро реестра слотов: типизированные обычные слоты и фабрики компонентов многократного использования, производные реквизиты, места в магазине и установка рендерера."
+  },
+  "@deepseek-ai/dsh-client-ui-subagent": {
+    "en": "Subagent conversation catalog, continuation routing UI, and '@' reference source",
+    "ru": "Каталог диалогов субагентов, пользовательский интерфейс маршрутизации продолжения и источник ссылок «@»."
+  },
+  "@deepseek-ai/dsh-client-ui-theme": {
+    "en": "Theme plugin: Host bootstrap for the pre-plugin palette; DOM-free ThemeRuntime for light/dark/system state; --dsw-* token styles and Appearance settings row",
+    "ru": "Плагин темы: хост-загрузчик для палитры перед плагином; ThemeRuntime без DOM для светлого/темного/системного состояния; --dsw-* стили токенов и строка настроек внешнего вида"
+  },
+  "@deepseek-ai/dsh-client-ui-tool": {
+    "en": "Client Tool call-tree renderer and keyed per-tool presentation slot",
+    "ru": "Средство визуализации дерева вызовов клиентского инструмента и слот презентации для каждого инструмента с ключами"
+  },
+  "@deepseek-ai/dsh-client-ui-trajectory": {
+    "en": "Trajectory event ledger with an interactive timing overview: pure-consumer plugin registering into the conversation ViewMap (no service)",
+    "ru": "Журнал событий траектории с интерактивным обзором времени: плагин для чистого потребителя, регистрирующийся в разговоре ViewMap (без службы)"
+  },
+  "@deepseek-ai/dsh-client-ui-user-questions": {
+    "en": "Web ask_user_question composer takeover and plan-review presentation UI",
+    "ru": "Использование веб-композитора Ask_user_question и пользовательский интерфейс представления плана-обзора"
+  },
+  "@deepseek-ai/dsh-client-ui-workflow-run": {
+    "en": "Durable workflow-run Conversation Node and nested member disclosure for dsh web",
+    "ru": "Надежный узел диалога, запускаемый рабочим процессом, и раскрытие вложенных участников для dsh web"
+  },
+  "@deepseek-ai/dsh-client-ui-workspace": {
+    "en": "Workspace picker plugin: one WorkspacePicker registered into the sidebar and empty-state workspace slots",
+    "ru": "Плагин выбора рабочей области: один WorkspacePicker зарегистрирован на боковой панели и в пустых слотах рабочей области."
+  },
+  "@deepseek-ai/dsh-cmdline": {
+    "en": "Immutable command-line handoff from a dsh launcher to any app plugin that injects cmdlineArgs",
+    "ru": "Неизменяемая передача командной строки от средства запуска dsh к любому плагину приложения, который внедряет cmdlineArgs."
+  },
+  "@deepseek-ai/dsh-command-compact": {
+    "en": "Human-facing slash command for explicit session compaction",
+    "ru": "Команда косой черты, обращенная к человеку, для явного сжатия сеанса."
+  },
+  "@deepseek-ai/dsh-command-feedback": {
+    "en": "Log-only session feedback: the record event, the sessionFeedback Host Remote, and the human-facing slash command",
+    "ru": "Обратная связь о сеансе только для журнала: событие записи, удаленный хост sessionFeedback и команда косой черты, обращенная к человеку."
+  },
+  "@deepseek-ai/dsh-command-goal": {
+    "en": "Human-facing slash command for persisted same-session goals",
+    "ru": "Команда косой черты с человеческим лицом для сохранения целей одного сеанса"
+  },
+  "@deepseek-ai/dsh-commands": {
+    "en": "Plugin-owned human command registry for DeepSeek Harness UIs",
+    "ru": "Реестр человеческих команд, принадлежащий плагину, для пользовательского интерфейса DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-compaction": {
+    "en": "Abstract compaction service seam (ctx.compaction) for the DeepSeek Harness",
+    "ru": "Интерфейс службы сжатия контекста (ctx.compaction) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-compaction-basic": {
+    "en": "Token-meter-driven compaction policy and LLM summarization backend for the DeepSeek Harness",
+    "ru": "Политика уплотнения на основе счетчика токенов и серверная часть обобщения LLM для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-compaction-image-offload": {
+    "en": "Durable image offload for image-capable routes: replace over-budget request images with placeholders and retry",
+    "ru": "Надежная выгрузка изображений для маршрутов, поддерживающих изображения: замените изображения запросов, превышающих бюджет, заполнителями и повторите попытку."
+  },
+  "@deepseek-ai/dsh-compaction-tool-result-pruner": {
+    "en": "Replay-safe model-free head/middle/tail pruning for tool-result surface nodes",
+    "ru": "Безопасная для повторного воспроизведения обрезка головы/середины/хвоста для узлов поверхности, полученных с помощью инструмента."
+  },
+  "@deepseek-ai/dsh-config-editor": {
+    "en": "Persist plugin configuration through profile patches and Loader reconciliation",
+    "ru": "Сохранение конфигурации плагина посредством исправлений профиля и согласования загрузчика."
+  },
+  "@deepseek-ai/dsh-cordis-client-runner": {
+    "en": "Browser half of dynamic dual-half plugin packages: event subscription, closure evaluation, guard facade, and loader entries",
+    "ru": "Половина браузера динамических пакетов плагинов двойной половины: подписка на события, оценка закрытия, защитный фасад и записи загрузчика."
+  },
+  "@deepseek-ai/dsh-cordis-host-runner": {
+    "en": "Dynamic package definition registry, host-half sandbox lifecycle, and invoke handler table for model-mounted dual-half packages",
+    "ru": "Реестр динамических пакетов, управление серверной песочницей и обработчики вызовов для двухчастных плагинов модели"
+  },
+  "@deepseek-ai/dsh-credentials": {
+    "en": "Abstract credential seam (ctx.credentials): settings carry references to secrets, providers own the values",
+    "ru": "Абстрактная связка учетных данных (ctx.credentials): настройки содержат ссылки на секреты, значения принадлежат поставщикам."
+  },
+  "@deepseek-ai/dsh-credentials-local": {
+    "en": "File-backed credentials provider ($DSH_HOME/.env under the live process environment) for the DeepSeek Harness",
+    "ru": "Поставщик учетных данных в виде файла ($DSH_HOME/.env в среде реального процесса) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-deepseek-account": {
+    "en": "Read account state and resolve official API credentials",
+    "ru": "Чтение состояния учетной записи и разрешение официальных учетных данных API"
+  },
+  "@deepseek-ai/dsh-deepseek-account-platform": {
+    "en": "Authorize DeepSeek accounts through browser PKCE",
+    "ru": "Авторизация учетных записей DeepSeek через браузер PKCE"
+  },
+  "@deepseek-ai/dsh-deepseek-llm-api-extensions": {
+    "en": "Additive request-field registry for the official DeepSeek LLM API adapter",
+    "ru": "Дополнительный реестр полей запроса для официального адаптера API DeepSeek LLM."
+  },
+  "@deepseek-ai/dsh-deque": {
+    "en": "Zero-dependency circular deque with amortized constant-time end operations and bounded vacant storage",
+    "ru": "Циклический дек с нулевой зависимостью, амортизированными конечными операциями с постоянным временем и ограниченным свободным хранилищем."
+  },
+  "@deepseek-ai/dsh-experimental-agent-team": {
+    "en": "Implicit-root Agent Teams roster, durable peer mailbox, and shared task DAG",
+    "ru": "Список групп агентов с неявным корнем, надежный одноранговый почтовый ящик и группа обеспечения доступности баз данных для общих задач."
+  },
+  "@deepseek-ai/dsh-experimental-agent-team-profile": {
+    "en": "Agent Teams collaboration, tools, and Web UI in one experimental bundle",
+    "ru": "Совместная работа команд агентов, инструменты и веб-интерфейс в одном экспериментальном пакете"
+  },
+  "@deepseek-ai/dsh-experimental-api-speech-to-text": {
+    "en": "Authenticated experimental speech transcription for browser clients",
+    "ru": "Аутентифицированная экспериментальная транскрипция речи для браузерных клиентов"
+  },
+  "@deepseek-ai/dsh-experimental-auto-review": {
+    "en": "Per-tool LLM authorization review for the DeepSeek Harness Auto permission preset",
+    "ru": "Проверка авторизации LLM для каждого инструмента для предустановки разрешений DeepSeek Harness Auto"
+  },
+  "@deepseek-ai/dsh-experimental-client-ui-agent-team": {
+    "en": "Web Agent Teams roster, task board, and teammate navigation",
+    "ru": "Список команд веб-агента, доска задач и навигация по товарищам по команде"
+  },
+  "@deepseek-ai/dsh-experimental-client-ui-voice-input": {
+    "en": "Record speech and insert editable text into the conversation draft",
+    "ru": "Запишите речь и вставьте редактируемый текст в черновик разговора."
+  },
+  "@deepseek-ai/dsh-experimental-speech-to-text": {
+    "en": "Experimental speech recognition with independently selectable providers",
+    "ru": "Экспериментальное распознавание речи с независимо выбираемыми поставщиками"
+  },
+  "@deepseek-ai/dsh-experimental-speech-to-text-sensevoice": {
+    "en": "Local SenseVoice ONNX transcription with a managed sherpa-onnx process",
+    "ru": "Локальная транскрипция SenseVoice ONNX с помощью управляемого процесса sherpa-onnx"
+  },
+  "@deepseek-ai/dsh-experimental-tool-agent-team": {
+    "en": "Scoped model-facing Agent Teams tools over ctx.agentTeams",
+    "ru": "Инструменты Agent Teams для работы с моделями с ограниченной областью действия поверх ctx.agentTeams"
+  },
+  "@deepseek-ai/dsh-experimental-voice-input-bundle": {
+    "en": "Experimental voice input with local SenseVoice; downloads its runtime on first use",
+    "ru": "Экспериментальный голосовой ввод с помощью локального SenseVoice; загружает среду выполнения при первом использовании"
+  },
+  "@deepseek-ai/dsh-file-reference": {
+    "en": "File-reference discovery contract and shared @file grammar",
+    "ru": "Контракт обнаружения ссылок на файлы и общая грамматика @file"
+  },
+  "@deepseek-ai/dsh-file-reference-local": {
+    "en": "Local-filesystem ctx.fileReferences provider with bounded fuzzy indexes",
+    "ru": "Поставщик локальной файловой системы ctx.fileReferences с ограниченными нечеткими индексами"
+  },
+  "@deepseek-ai/dsh-fs": {
+    "en": "Abstract filesystem capability seam (ctx.fs) for the DeepSeek Harness — vocabulary types, the FileSystem service (text IO + optional version-guarded atomic mutations), and the fs/* policy event vocabulary",
+    "ru": "Интерфейс файловой системы (ctx.fs): чтение и запись текста, атомарные изменения с проверкой версии и события политики fs/*"
+  },
+  "@deepseek-ai/dsh-fs-local": {
+    "en": "Local-filesystem implementation of the DeepSeek Harness filesystem seam (ctx.fs)",
+    "ru": "Реализация шва файловой системы DeepSeek Harness в локальной файловой системе (ctx.fs)"
+  },
+  "@deepseek-ai/dsh-fs-observation-policy": {
+    "en": "File-context policy plugin for the DeepSeek Harness — observed-state, read-before-edit, and version-guarded write/edit added over the ctx.fs provider seam through the fs/* event gate (no service API)",
+    "ru": "Политика работы с файлами: отслеживание состояния, обязательное чтение перед правкой и запись с проверкой версии через события fs/*"
+  },
+  "@deepseek-ai/dsh-fs-sandbox": {
+    "en": "Sandbox-enforcing implementation of the DeepSeek Harness filesystem seam: fences write/edit by the per-call sandbox mode (read-only denies mutation, workspace-write contains it to the workspace + temp roots) while reads pass through",
+    "ru": "Реализация шва файловой системы DeepSeek Harness с поддержкой песочницы: ограничивает запись/редактирование в режиме песочницы для каждого вызова (только чтение запрещает мутацию, запись в рабочую область содержит ее в рабочей области + временные корни), пока чтение проходит через"
+  },
+  "@deepseek-ai/dsh-goal": {
+    "en": "Event-sourced same-session goal state and lifecycle service for the DeepSeek Harness",
+    "ru": "Состояние целей и жизненный цикл одного и того же сеанса на основе событий для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-goal-round-driver": {
+    "en": "Race-fenced same-session goal-round driver",
+    "ru": "Гонщик, забивший гол за одну сессию"
+  },
+  "@deepseek-ai/dsh-headless": {
+    "en": "The dsh one-shot bundle: a direct core Agent/Session runner over dsh-base with no Host, HTTP, or browser layer",
+    "ru": "Одноразовый пакет dsh: прямой запуск основного агента/сеанса на базе dsh без уровня хоста, HTTP или браузера."
+  },
+  "@deepseek-ai/dsh-hmr": {
+    "en": "Coordinated module and profile configuration hot reload",
+    "ru": "Скоординированная горячая перезагрузка конфигурации модуля и профиля"
+  },
+  "@deepseek-ai/dsh-home-paths": {
+    "en": "Shared filesystem path helpers for the DeepSeek Harness",
+    "ru": "Помощники пути к общей файловой системе для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-hook-protocol": {
+    "en": "Shared Claude Code / Codex hook wire protocol: matcher engine, stdin/exit-code/stdout codec, multi-hook merge, and hook/* session events",
+    "ru": "Общий код Claude Code/протокол перехвата Codex: механизм сопоставления, кодек stdin/exit-code/stdout, слияние с несколькими перехватчиками и события сеанса перехвата/*"
+  },
+  "@deepseek-ai/dsh-hooks-claude-code": {
+    "en": "Bridge plugin: run a Claude Code hooks.json / settings hook config on the DeepSeek Harness interception seams",
+    "ru": "Плагин Bridge: запустите конфигурацию ловушки Claude Codeooks.json/settings на швах перехвата DeepSeek Harness."
+  },
+  "@deepseek-ai/dsh-hooks-codex": {
+    "en": "Bridge plugin: run a Codex hooks.json hook config on the DeepSeek Harness interception seams",
+    "ru": "Плагин Bridge: запустите конфигурацию перехвата Codexooks.json на швах перехвата DeepSeek Harness."
+  },
+  "@deepseek-ai/dsh-host-directory-picker": {
+    "en": "Abstract workspace-directory picking seam (ctx.directoryPicker) for the DeepSeek Harness web GUI host",
+    "ru": "Абстрактное соединение выбора каталога рабочей области (ctx.directoryPicker) для хоста веб-интерфейса DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-host-directory-picker-auto": {
+    "en": "Adaptive chooser of the directory-picker seam: resolves the host situation at boot and mounts the native or browse backend for the DeepSeek Harness web GUI host",
+    "ru": "Адаптивный выбор шва выбора каталога: разрешает ситуацию с хостом при загрузке и монтирует собственный сервер или серверную часть просмотра для хоста с веб-интерфейсом DeepSeek Harness."
+  },
+  "@deepseek-ai/dsh-host-directory-picker-browse": {
+    "en": "In-app browsing backend of the directory-picker seam (listing/creation primitives over the host filesystem)",
+    "ru": "Серверная часть просмотра в приложении для выбора каталога (примитивы списка/создания в файловой системе хоста)"
+  },
+  "@deepseek-ai/dsh-host-directory-picker-native": {
+    "en": "Native-OS-chooser backend of the directory-picker seam for the DeepSeek Harness web GUI host",
+    "ru": "Серверная часть средства выбора собственной ОС для узла выбора каталога для хоста с графическим интерфейсом веб-интерфейса DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-host-frontend-static": {
+    "en": "SPA dist server for the Web shell: owns the webserver fallback seat, serving explicit index entries and static assets with traversal rejection and 404 misses",
+    "ru": "Распределенный сервер SPA для веб-оболочки: владеет резервным местом веб-сервера, обслуживая явные записи индекса и статические активы с отклонением обхода и ошибками 404."
+  },
+  "@deepseek-ai/dsh-host-open-in-app": {
+    "en": "Host half of open-in-app: resolved application catalog, icons, and the launch endpoint as three webServer routes",
+    "ru": "Хостинг половины открытого приложения: разрешенный каталог приложений, значки и конечная точка запуска в виде трех маршрутов веб-сервера."
+  },
+  "@deepseek-ai/dsh-host-plugin-inventory": {
+    "en": "Read-only Remote projection of current Cordis Loader plugin state",
+    "ru": "Только для чтения. Удаленное проецирование текущего состояния плагина Cordis Loader."
+  },
+  "@deepseek-ai/dsh-host-webserver": {
+    "en": "Web route-registration plugin: HTTP and upgrade routes, index transform taps, and static dist fallback; knows no harness concepts",
+    "ru": "Плагин регистрации веб-маршрутов: маршруты HTTP и обновления, преобразования индекса и резервное копирование статического дистрибутива; не знает концепций упряжи"
+  },
+  "@deepseek-ai/dsh-http-proxy": {
+    "en": "Process-wide outbound HTTP proxy policy for DeepSeek Harness: resolve it from the launch environment and install it as undici's global dispatcher",
+    "ru": "Политика исходящего HTTP-прокси для всего процесса для DeepSeek Harness: разрешите ее из среды запуска и установите в качестве глобального диспетчера undici."
+  },
+  "@deepseek-ai/dsh-invariants": {
+    "en": "Registry service for package-owned DeepSeek Harness runtime invariants",
+    "ru": "Служба реестра для принадлежащих пакету инвариантов времени выполнения DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-jobs": {
+    "en": "Background job registry (ctx.jobs) for the DeepSeek Harness — shared ids, owner isolation, polling, cancellation, and completion listeners for long-running tool work",
+    "ru": "Реестр фоновых заданий (ctx.jobs) для DeepSeek Harness — общие идентификаторы, изоляция владельцев, опрос, отмена и прослушиватели завершения для длительной работы инструмента."
+  },
+  "@deepseek-ai/dsh-jobs-local": {
+    "en": "Process-local implementation of the DeepSeek Harness background job registry seam",
+    "ru": "Локальная реализация шва реестра фоновых заданий DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-launch-environment": {
+    "en": "Immutable DeepSeek Harness launch environment that records which layer supplied each value",
+    "ru": "Неизменяемая среда запуска DeepSeek Harness, которая записывает, какой слой предоставил каждое значение."
+  },
+  "@deepseek-ai/dsh-lazy-require": {
+    "en": "Caller-relative, success-cached lazy loading for CommonJS-compatible Host dependencies",
+    "ru": "Отложенная загрузка с кэшированием успехов относительно вызывающего абонента для зависимостей хоста, совместимых с CommonJS."
+  },
+  "@deepseek-ai/dsh-llm": {
+    "en": "Provider-neutral LLM service interface for the DeepSeek Harness",
+    "ru": "Независимый от поставщика сервисный интерфейс LLM для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-llm-deepseek": {
+    "en": "DeepSeek Messages adapter",
+    "ru": "Адаптер сообщений DeepSeek"
+  },
+  "@deepseek-ai/dsh-llm-deepseek-account": {
+    "en": "DeepSeek account provider authentication and discovery",
+    "ru": "Аутентификация и обнаружение поставщика учетных записей DeepSeek"
+  },
+  "@deepseek-ai/dsh-llm-deepseek-api-key": {
+    "en": "DeepSeek api-key provider authentication and discovery",
+    "ru": "Аутентификация и обнаружение поставщика API-ключей DeepSeek"
+  },
+  "@deepseek-ai/dsh-llm-pi-ai": {
+    "en": "pi-ai-backed DeepSeek adapter for the DeepSeek Harness LLM seam (design-verification twin of dsh-llm-deepseek)",
+    "ru": "Адаптер DeepSeek с поддержкой pi-ai для шва DeepSeek Harness LLM (двойник dsh-llm-deepseek для проверки конструкции)"
+  },
+  "@deepseek-ai/dsh-llm-retry": {
+    "en": "Provider-routed LLM request retry policy for the DeepSeek Harness",
+    "ru": "Политика повтора запросов LLM, маршрутизируемая поставщиком, для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-mcp-client": {
+    "en": "MCP client bridge: connects to MCP servers and registers their tools on ctx.tools",
+    "ru": "Клиентский мост MCP: подключается к серверам MCP и регистрирует их инструменты на ctx.tools."
+  },
+  "@deepseek-ai/dsh-mcp-resources": {
+    "en": "Scoped MCP resource discovery and reading through shared model tools",
+    "ru": "Обнаружение и чтение ресурсов MCP с использованием общих инструментов модели."
+  },
+  "@deepseek-ai/dsh-message-feedback": {
+    "en": "Canonical Session-log ratings and notes for finalized assistant messages",
+    "ru": "Оценки журнала сеансов Canonical и примечания к завершенным сообщениям помощника"
+  },
+  "@deepseek-ai/dsh-native-command": {
+    "en": "Host-native command and path-opening utilities with shell-free execution, cancellation, desktop detection, and WSL handoff",
+    "ru": "Собственные для хоста утилиты команд и открытия путей с выполнением без оболочки, отменой, обнаружением рабочего стола и передачей обслуживания WSL"
+  },
+  "@deepseek-ai/dsh-office-to-pdf": {
+    "en": "Shared Office-to-PDF conversion with bounded queues and caching",
+    "ru": "Общее преобразование Office в PDF с ограниченными очередями и кэшированием"
+  },
+  "@deepseek-ai/dsh-output-retention": {
+    "en": "Zero-dependency bounded-retention primitive: ItemRetainer/TextRetainer + neutral notice helpers (what did we keep, what did we omit)",
+    "ru": "Примитив ограниченного хранения с нулевой зависимостью: ItemRetainer/TextRetainer + нейтральные помощники уведомлений (что мы сохранили, что пропустили)"
+  },
+  "@deepseek-ai/dsh-package-manifest": {
+    "en": "Shared type declarations for package.json.dsh configuration fields",
+    "ru": "Объявления общего типа для полей конфигурации package.json.dsh"
+  },
+  "@deepseek-ai/dsh-permission-presets": {
+    "en": "User-facing permission presets (ctx.permissionPresets) for the DeepSeek Harness: one product-level Permissions select bundling the sandbox-mode and approval-policy knobs, written through to their own session events",
+    "ru": "Предварительные настройки разрешений для пользователя (ctx.permissionPresets) для DeepSeek Harness: один выбор разрешений на уровне продукта, объединяющий ручки режима песочницы и политики утверждения, записанные в их собственные события сеанса."
+  },
+  "@deepseek-ai/dsh-persona": {
+    "en": "Composition-authored deployment persona section for the DeepSeek Harness",
+    "ru": "Раздел профиля развертывания, созданный Composition для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-plan-mode": {
+    "en": "Logged per-agent plan mode with deployment guidance, a direct slash command, and a user-reviewed exit",
+    "ru": "Режим логируемого плана для каждого агента с руководством по развертыванию, командой прямой косой черты и выходом, проверяемым пользователем."
+  },
+  "@deepseek-ai/dsh-plugin-manager": {
+    "en": "Current-profile plugin and bundle management shared by dsh CLI, Web and agent tools",
+    "ru": "Плагин текущего профиля и управление пакетами, совместно используемое интерфейсом командной строки dsh, веб-инструментами и инструментами агента."
+  },
+  "@deepseek-ai/dsh-plugin-package-inventory-deepseek": {
+    "en": "Active Loader-backed plugin package inventory for official DeepSeek LLM API requests",
+    "ru": "Инвентаризация пакетов плагинов, поддерживаемых активным загрузчиком, для официальных запросов API DeepSeek LLM"
+  },
+  "@deepseek-ai/dsh-ptc-runtime": {
+    "en": "Abstract PTC execution seam (ctx.ptcRuntime) for the DeepSeek Harness",
+    "ru": "Интерфейс выполнения PTC (ctx.ptcRuntime) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-ptc-runtime-node": {
+    "en": "Sandboxed Node process implementation of the DeepSeek Harness PTC execution capability",
+    "ru": "Реализация процесса изолированного узла с возможностью выполнения PTC DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-pwsh-local": {
+    "en": "Local PowerShell implementation of the DeepSeek Harness bash executor seam",
+    "ru": "Локальная реализация PowerShell шва исполнителя bash DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-pwsh-sandbox": {
+    "en": "Sandbox-consuming implementation of the DeepSeek Harness PowerShell executor seam (confines every command via ctx.sandbox, reports denial/enforcement result facts)",
+    "ru": "Реализация шва исполнителя DeepSeek Harness PowerShell, использующая песочницу (ограничивает каждую команду через ctx.sandbox, сообщает о фактах результатов отказа/принуждения)"
+  },
+  "@deepseek-ai/dsh-repeat-tool-reminder": {
+    "en": "Repeat-tool-call guard plugin: advisory reminders when an agent loops on identical tool calls",
+    "ru": "Плагин защиты от повторных вызовов инструментов: консультативные напоминания, когда агент зацикливается на идентичных вызовах инструментов."
+  },
+  "@deepseek-ai/dsh-sandbox": {
+    "en": "Abstract process-sandbox seam (ctx.sandbox) for the DeepSeek Harness: same-world confinement vocabulary and the SandboxProvider contract",
+    "ru": "Абстрактное соединение песочницы процесса (ctx.sandbox) для DeepSeek Harness: словарь ограничения того же мира и контракт SandboxProvider"
+  },
+  "@deepseek-ai/dsh-sandbox-local": {
+    "en": "Local process-sandbox backends for the DeepSeek Harness sandbox seam: bwrap, the npm-distributed landlock-run launcher, macOS Seatbelt, or the Windows ACL restricted-token runner — functionally probed, fail-closed",
+    "ru": "Локальные серверные части песочницы процесса для шва песочницы DeepSeek Harness: bwrap, распространяемый npm модуль запуска без выхода к морю, macOS Seatbelt или механизм запуска ограниченных токенов Windows ACL — функционально проверенный, отказоустойчивый"
+  },
+  "@deepseek-ai/dsh-sandbox-policy": {
+    "en": "Per-call sandbox policy resolver and current model context: deployment fallbacks plus each session's mode and workspace root, shared by every enforcing capability family",
+    "ru": "Сопоставитель политики изолированной программной среды для каждого вызова и контекст текущей модели: резервные варианты развертывания, а также режим каждого сеанса и корень рабочей области, общие для каждого семейства возможностей обеспечения соблюдения."
+  },
+  "@deepseek-ai/dsh-sandbox-windows-acl": {
+    "en": "Windows ACL write-restriction sandbox backend (restricted-token spawn with capability-SID write allowlist) for the DeepSeek Harness sandbox seam",
+    "ru": "Серверная часть песочницы Windows ACL с ограничением записи (порождение ограниченных токенов с разрешенным списком записи SID возможностей) для шва песочницы DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-schedule": {
+    "en": "Host-wide durable reminders with shared management and original-Session delivery",
+    "ru": "Надежные напоминания на уровне хоста с общим управлением и доставкой в исходном сеансе."
+  },
+  "@deepseek-ai/dsh-scope": {
+    "en": "Scoped-context registration primitive (scope tags, scope-filtered event dispatch) for the DeepSeek Harness",
+    "ru": "Примитив регистрации контекста с ограниченной областью действия (теги области действия, отправка событий с фильтрацией области действия) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-sdk-app": {
+    "en": "The dsh SDK profile bundle: stdio JSON-RPC serving and process lifecycle over dsh-base",
+    "ru": "Пакет профилей dsh SDK: обслуживание stdio JSON-RPC и жизненный цикл процессов через dsh-base"
+  },
+  "@deepseek-ai/dsh-sdk-jsonrpc-server": {
+    "en": "Stdio JSON-RPC server plugin for out-of-process DeepSeek Harness SDK clients",
+    "ru": "Плагин сервера Stdio JSON-RPC для внепроцессных клиентов DeepSeek Harness SDK"
+  },
+  "@deepseek-ai/dsh-sdk-minimal": {
+    "en": "The standalone minimal SDK profile bundle: JSON-RPC, one DeepSeek adapter, persistent shell, and JSONL sessions",
+    "ru": "Автономный минимальный пакет профилей SDK: JSON-RPC, один адаптер DeepSeek, постоянная оболочка и сеансы JSONL."
+  },
+  "@deepseek-ai/dsh-sdk-protocol": {
+    "en": "Shared wire protocol for the DeepSeek Harness SDK runtime: the newline-delimited JSON-RPC stdio transport and the named request, result, and notification types spoken between the runtime server and SDK clients",
+    "ru": "Общий проводной протокол для среды выполнения DeepSeek Harness SDK: транспорт JSON-RPC stdio с разделителями-новой строкой и именованные типы запросов, результатов и уведомлений, передаваемые между сервером среды выполнения и клиентами SDK."
+  },
+  "@deepseek-ai/dsh-session": {
+    "en": "Event-sourced session store for the DeepSeek Harness",
+    "ru": "Хранилище сеансов на основе событий для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-session-checkpoint-policy": {
+    "en": "Semantic session durability checkpoints before model requests and tool side effects",
+    "ru": "Контрольные точки устойчивости семантического сеанса перед запросами модели и побочные эффекты инструмента"
+  },
+  "@deepseek-ai/dsh-session-format": {
+    "en": "Streaming adjacent Session format migration machinery",
+    "ru": "Потоковая передача механизма миграции формата соседнего сеанса"
+  },
+  "@deepseek-ai/dsh-session-format-catalog": {
+    "en": "Build-static first-party Session format codec and migration catalog",
+    "ru": "Создайте статический собственный кодек формата сеанса и каталог миграции."
+  },
+  "@deepseek-ai/dsh-session-format-v0-to-v1": {
+    "en": "Frozen released-v0 Session codec and identity migration to v1",
+    "ru": "Выпущен кодек сеанса Frozen-v0 и миграция удостоверений на версию v1"
+  },
+  "@deepseek-ai/dsh-session-format-v1-to-v2": {
+    "en": "Frozen released-v1 Session codec and assistant-stream migration to v2",
+    "ru": "Выпущен кодек сеанса Frozen v1 и миграция потока помощника на v2."
+  },
+  "@deepseek-ai/dsh-session-format-v2-to-v3": {
+    "en": "Streaming system-prompt, canonical-envelope and PTC migration into V3",
+    "ru": "Потоковая миграция системных запросов, канонических конвертов и PTC в V3"
+  },
+  "@deepseek-ai/dsh-session-format-v3-to-v4": {
+    "en": "Streaming tool-role migration and delivery validation from Session V3 to V4",
+    "ru": "Потоковая миграция ролей инструментов и проверка доставки из сеанса V3 в V4"
+  },
+  "@deepseek-ai/dsh-session-log-deepseek": {
+    "en": "Incremental lossless session-log request extension for the official DeepSeek LLM API",
+    "ru": "Расширение дополнительных запросов журнала сеансов без потерь для официального API DeepSeek LLM."
+  },
+  "@deepseek-ai/dsh-session-log-export": {
+    "en": "Web Session-log export command and shared download dialog",
+    "ru": "Команда экспорта журнала веб-сессии и диалоговое окно общей загрузки"
+  },
+  "@deepseek-ai/dsh-session-persistence": {
+    "en": "Abstract durable session persistence seam (ctx.sessionPersistence) for the DeepSeek Harness",
+    "ru": "Абстрактное устойчивое соединение сеансов (ctx.sessionPersistence) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-session-persistence-jsonl": {
+    "en": "JSONL durable session persistence backend for the DeepSeek Harness",
+    "ru": "Серверная часть долговременного сохранения сеансов JSONL для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-session-projection": {
+    "en": "Session-projection seam: the merge-extensible projection type table, the provider contract, and the ctx.sessionProjections registry serving whole current values of log-derived per-session state",
+    "ru": "Соединение проекции сеанса: таблица типов проекции, расширяемая слиянием, контракт поставщика и реестр ctx.sessionProjections, обслуживающий все текущие значения состояния каждого сеанса, полученные из журнала."
+  },
+  "@deepseek-ai/dsh-session-projection-cache": {
+    "en": "Persisted projection cache (ctx.sessionProjectionCache): durable per-session checkpoint records on the session_projcache storage domain (per-record layout), throttled write-behind, and the cached listing read",
+    "ru": "Постоянный кэш проекций (ctx.sessionProjectionCache): надежные записи контрольных точек для каждого сеанса в домене хранения session_projcache (макет для каждой записи), регулируемая отложенная запись и чтение кэшированных списков."
+  },
+  "@deepseek-ai/dsh-session-query": {
+    "en": "Combined session query service contract with concrete reads, traces, and filters",
+    "ru": "Комбинированный контракт службы запросов сеанса с конкретными операциями чтения, трассировки и фильтрами."
+  },
+  "@deepseek-ai/dsh-session-query-sqlite": {
+    "en": "Concrete ctx.sessionQuery backend with SQLite FTS5 search",
+    "ru": "Конкретный бэкэнд ctx.sessionQuery с поиском SQLite FTS5"
+  },
+  "@deepseek-ai/dsh-session-reference": {
+    "en": "Cross-session snapshot references and durable untrusted model context (ctx.sessionReferenceResolver)",
+    "ru": "Межсессионные ссылки на снимки и устойчивый недоверенный контекст модели (ctx.sessionReferenceResolver)"
+  },
+  "@deepseek-ai/dsh-session-stats": {
+    "en": "Whole-log conversation counts and wall times projection (sessionStats) for the DeepSeek Harness",
+    "ru": "Полный журнал разговоров и прогноз времени ожидания (sessionStats) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-session-telemetry": {
+    "en": "SessionTelemetryBackend seam for the DeepSeek Harness: session-event capture, projection, redaction, and handoff to a reporting backend",
+    "ru": "Соединение SessionTelemetryBackend для DeepSeek Harness: захват, проецирование, редактирование и передача событий сеанса на серверную часть отчетов."
+  },
+  "@deepseek-ai/dsh-session-telemetry-otel": {
+    "en": "OpenTelemetry backend for the DeepSeek Harness telemetry seam: hands captured session records to the OTel JS SDK's log pipeline",
+    "ru": "Серверная часть OpenTelemetry для телеметрического шва DeepSeek Harness: запись записей сеансов передается в конвейер журналов OTel JS SDK."
+  },
+  "@deepseek-ai/dsh-session-title": {
+    "en": "Log-backed session title service and provider registry for the DeepSeek Harness",
+    "ru": "Служба названий сеансов с резервной копией и реестр поставщиков для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-session-title-first-prompt-llm": {
+    "en": "First-message LLM provider plugin for DeepSeek Harness session titles",
+    "ru": "Плагин поставщика LLM для первого сообщения для заголовков сессий DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-session-title-llm": {
+    "en": "Shared LLM generation policy for DeepSeek Harness session-title providers",
+    "ru": "Общая политика создания LLM для поставщиков сессий DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-session-turn-outline": {
+    "en": "Whole-log turn outline projection (turnOutline) for the DeepSeek Harness",
+    "ru": "Сводка ходов диалога по полному журналу событий (turnOutline) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-settings": {
+    "en": "Abstract user-settings seam (ctx.settings) for the DeepSeek Harness",
+    "ru": "Интерфейс пользовательских настроек (ctx.settings) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-shell": {
+    "en": "Abstract bash executor seam (ctx.shell) for the DeepSeek Harness",
+    "ru": "Интерфейс выполнения команд Bash (ctx.shell) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-shell-env": {
+    "en": "Tool-independent managed DSH_* shell environment registry",
+    "ru": "Независимый от инструментов управляемый реестр среды оболочки DSH_*"
+  },
+  "@deepseek-ai/dsh-skill": {
+    "en": "Agent skill provider registry for the DeepSeek Harness",
+    "ru": "Реестр поставщиков навыков агента для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-skill-badge": {
+    "en": "Bundled dsh badge skill provider for DeepSeek Harness",
+    "ru": "Включенный поставщик навыков значка dsh для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-skill-filesystem": {
+    "en": "Local filesystem skill provider for the DeepSeek Harness",
+    "ru": "Поставщик навыков работы с локальной файловой системой для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-skill-office": {
+    "en": "Bundled Word, PowerPoint, and Excel workflows and structural checks",
+    "ru": "Объединенные рабочие процессы Word, PowerPoint и Excel и структурные проверки"
+  },
+  "@deepseek-ai/dsh-spill": {
+    "en": "Abstract spill storage seam (ctx.spillStore) for the DeepSeek Harness — save oversized tool text and return a retrieval locator",
+    "ru": "Интерфейс хранения больших выводов инструментов (ctx.spillStore): сохраняет текст и возвращает адрес для последующего чтения"
+  },
+  "@deepseek-ai/dsh-spill-local": {
+    "en": "Local-filesystem implementation of the DeepSeek Harness spill storage seam (private session-scoped files)",
+    "ru": "Реализация в локальной файловой системе шва хранилища утечки DeepSeek Harness (частные файлы в области сеанса)"
+  },
+  "@deepseek-ai/dsh-spill-policy": {
+    "en": "Token-budgeted tool-result retention with recoverable text and image paths",
+    "ru": "Сохранение результатов инструмента за счет токенов с восстанавливаемыми путями к тексту и изображениям"
+  },
+  "@deepseek-ai/dsh-storage": {
+    "en": "Storage hub (ctx.storage): named backend registry plus mounted data-form facilities for the DeepSeek Harness",
+    "ru": "Концентратор хранилища (ctx.storage): именованный серверный реестр плюс смонтированные средства формирования данных для DeepSeek Harness."
+  },
+  "@deepseek-ai/dsh-storage-domain": {
+    "en": "Domain data form (ctx.storage.domain): schema-validated, event-emitting KV domains over storage backends for the DeepSeek Harness",
+    "ru": "Форма данных домена (ctx.storage.domain): проверенные по схеме домены KV, генерирующие события, через серверные части хранилища для DeepSeek Harness."
+  },
+  "@deepseek-ai/dsh-storage-json": {
+    "en": "JSON file KV storage backend for the DeepSeek Harness storage hub",
+    "ru": "Серверная часть хранилища KV в формате JSON для концентратора хранилища DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-subagent": {
+    "en": "Abstract subagent seam (ctx.subagents): named-provider registry for delegating to child agents",
+    "ru": "Абстрактное соединение субагентов (ctx.subagents): реестр именованных поставщиков для делегирования дочерним агентам."
+  },
+  "@deepseek-ai/dsh-subagent-fork-in-process": {
+    "en": "In-process fork subagent backend: runs a child agent seeded with a prefix of the parent's log",
+    "ru": "Внутренняя часть субагента разветвления: запускает дочерний агент, заполненный префиксом родительского журнала."
+  },
+  "@deepseek-ai/dsh-subagent-in-process-driver": {
+    "en": "Shared in-process subagent run driver: drives a child agent on ctx.agents (used by the spawn and fork backends)",
+    "ru": "Общий драйвер запуска подагента в процессе: управляет дочерним агентом в ctx.agents (используется серверными модулями создания и разветвления)."
+  },
+  "@deepseek-ai/dsh-subagent-spawn-in-process": {
+    "en": "In-process spawn subagent backend: runs a fresh child agent on ctx.agents",
+    "ru": "Серверная часть субагента создания в процессе: запускает новый дочерний агент на ctx.agents."
+  },
+  "@deepseek-ai/dsh-subprocess": {
+    "en": "Subprocess seam (ctx.subprocess) for the DeepSeek Harness — managed process groups, bounded spill-backed output, and escalated kills behind one abstract service",
+    "ru": "Интерфейс подпроцессов (ctx.subprocess): управление группами процессов, ограничение вывода с сохранением излишка и принудительное завершение"
+  },
+  "@deepseek-ai/dsh-subprocess-local": {
+    "en": "Local-subprocess implementation of the DeepSeek Harness subprocess seam",
+    "ru": "Локальная реализация шва подпроцесса DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-system-prompt": {
+    "en": "System prompt assembly registry for the DeepSeek Harness",
+    "ru": "Реестр системных подсказок для сборки DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-terminal": {
+    "en": "Persistent PTY session seam for the DeepSeek Harness — owner-scoped ids, backend registry, interactive sends, reads, signals, and awaited cleanup",
+    "ru": "Постоянный сеанс сеанса PTY для DeepSeek Harness — идентификаторы на уровне владельца, внутренний реестр, интерактивные отправки, чтения, сигналы и ожидаемая очистка."
+  },
+  "@deepseek-ai/dsh-terminal-bash": {
+    "en": "Persistent shell PTY backend over the DeepSeek Harness subprocess terminal primitive",
+    "ru": "Постоянная серверная часть PTY оболочки через примитив терминала подпроцесса DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-time-context": {
+    "en": "Durable per-step context with the current time and elapsed time",
+    "ru": "Надежный пошаговый контекст с текущим и прошедшим временем."
+  },
+  "@deepseek-ai/dsh-timeout": {
+    "en": "Zero-dependency timeout/deadline primitive: clampTimeout, deadline, timeoutOf, TimeoutReason (timing + classification only, no termination)",
+    "ru": "Примитив тайм-аута/крайнего срока с нулевой зависимостью: зажимTimeout, крайний срок, timeoutOf, TimeoutReason (только время + классификация, без завершения)"
+  },
+  "@deepseek-ai/dsh-tmux-context": {
+    "en": "Opt-in durable per-step context with this agent's tmux pane and window location",
+    "ru": "Включите постоянный контекст для каждого шага с помощью панели tmux и местоположения окна этого агента."
+  },
+  "@deepseek-ai/dsh-token-meter": {
+    "en": "Replay-aware token measurement service (ctx.tokenMeter) for the DeepSeek Harness",
+    "ru": "Служба измерения токенов с поддержкой воспроизведения (ctx.tokenMeter) для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-tool-ask-user": {
+    "en": "Model-facing ask_user_question tool over the ctx.userQuestions seam",
+    "ru": "Инструмент Ask_user_question, ориентированный на модель, поверх шва ctx.userQuestions"
+  },
+  "@deepseek-ai/dsh-tool-bash": {
+    "en": "Model-facing bash tool with optional generic background-job and sandbox-escalation support",
+    "ru": "Инструмент bash для работы с моделями с дополнительной поддержкой общих фоновых заданий и эскалации в песочнице."
+  },
+  "@deepseek-ai/dsh-tool-bash-persistent": {
+    "en": "Model-facing owner-scoped persistent Bash tool backed by the Harness PTY service",
+    "ru": "Постоянный инструмент Bash с доступом к модели и областью действия владельца, поддерживаемый сервисом Harness PTY."
+  },
+  "@deepseek-ai/dsh-tool-call-timeout-policy": {
+    "en": "Tool-call timeout policy: a tools/execute wrapper that arms a per-tool deadline on exec.signal and returns TOOL_TIMEOUT when it wins",
+    "ru": "Политика тайм-аута вызова инструмента: оболочка инструментов/выполнения, которая устанавливает крайний срок для каждого инструмента в exec.signal и возвращает TOOL_TIMEOUT в случае победы."
+  },
+  "@deepseek-ai/dsh-tool-cordis": {
+    "en": "Read-only runtime API inspection for Harness plugin development",
+    "ru": "Просмотр API работающего Harness в режиме только для чтения — для разработки плагинов"
+  },
+  "@deepseek-ai/dsh-tool-fs": {
+    "en": "Model-facing filesystem tools (read, write, edit) over the DeepSeek Harness filesystem seam (ctx.fs)",
+    "ru": "Инструменты файловой системы, работающие с моделью (чтение, запись, редактирование) поверх шва файловой системы DeepSeek Harness (ctx.fs)"
+  },
+  "@deepseek-ai/dsh-tool-fs-search": {
+    "en": "Model-facing filesystem discovery tools (glob, grep) backed by the packaged ripgrep binary (@vscode/ripgrep)",
+    "ru": "Инструменты обнаружения файловой системы, ориентированные на модель (glob, grep), поддерживаемые упакованным двоичным файлом ripgrep (@vscode/ripgrep)"
+  },
+  "@deepseek-ai/dsh-tool-goal": {
+    "en": "Model-facing same-session goal tools with execution-time authority checks",
+    "ru": "Инструменты достижения целей в рамках одного сеанса, работающие с моделями, с проверкой полномочий во время выполнения"
+  },
+  "@deepseek-ai/dsh-tool-jobs": {
+    "en": "Model-facing background job control tools (job_output, job_list, job_kill) over the ctx.jobs registry",
+    "ru": "Инструменты управления фоновыми заданиями, работающими с моделью (job_output, job_list, job_kill) через реестр ctx.jobs"
+  },
+  "@deepseek-ai/dsh-tool-present": {
+    "en": "Explicit workspace file delivery declarations for the DeepSeek Harness",
+    "ru": "Явные объявления о доставке файлов рабочей области для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-tool-pwsh": {
+    "en": "Model-facing pwsh tool over the bash executor seam",
+    "ru": "Инструмент pwsh, обращенный к модели, поверх шва bashexecutor"
+  },
+  "@deepseek-ai/dsh-tool-pwsh-persistent": {
+    "en": "Model-facing owner-scoped persistent PowerShell tool backed by the Harness PTY service",
+    "ru": "Постоянный инструмент PowerShell на уровне владельца, работающий с моделью и поддерживаемый службой Harness PTY."
+  },
+  "@deepseek-ai/dsh-tool-ralph": {
+    "en": "Model-facing fresh-agent Ralph loop over the workflow and subagent seams",
+    "ru": "Новый агент, работающий с моделью, Ральф перебирает рабочий процесс и швы субагентов."
+  },
+  "@deepseek-ai/dsh-tool-skill": {
+    "en": "Model-facing skill loading tool for the DeepSeek Harness",
+    "ru": "Инструмент загрузки навыков работы с моделью для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-tool-str-replace-editor": {
+    "en": "Model-facing view, create, literal replace, and line insert tool over the Harness filesystem service",
+    "ru": "Инструмент просмотра модели, создания, буквальной замены и вставки строк через службу файловой системы Harness"
+  },
+  "@deepseek-ai/dsh-tool-subagent": {
+    "en": "Model-facing subagent delegation tool over the ctx.subagents seam",
+    "ru": "Инструмент делегирования субагентов, ориентированный на модель, поверх шва ctx.subagents"
+  },
+  "@deepseek-ai/dsh-tool-subagent-control": {
+    "en": "Globally named send_message, interrupt_agent, and list_agents tools over ctx.subagents continuations",
+    "ru": "Инструменты send_message, прерывания_агента и list_agents с глобальными именами поверх продолжений ctx.subagents."
+  },
+  "@deepseek-ai/dsh-tool-todo": {
+    "en": "Model-facing todo_write tool over the DeepSeek Harness event-sourced session log",
+    "ru": "Инструмент todo_write, работающий с моделью, через журнал сеансов DeepSeek Harness на основе событий."
+  },
+  "@deepseek-ai/dsh-tool-web": {
+    "en": "Model-facing web tools (web_search, web_fetch) over the DeepSeek Harness web capability seam (ctx.web)",
+    "ru": "Веб-инструменты для работы с моделями (web_search, web_fetch) поверх веб-возможностей DeepSeek Harness (ctx.web)"
+  },
+  "@deepseek-ai/dsh-tool-workflow": {
+    "en": "Model-facing workflow tool: run a JavaScript orchestration script over ctx.workflowEngine",
+    "ru": "Инструмент рабочего процесса, ориентированный на модель: запустите сценарий оркестровки JavaScript через ctx.workflowEngine."
+  },
+  "@deepseek-ai/dsh-tool-workspace-dependencies": {
+    "en": "The load_workspace_dependencies tool: absolute paths into a bundled Python, Node.js, and pnpm payload",
+    "ru": "Инструмент load_workspace_dependenties: абсолютные пути к связанной полезной нагрузке Python, Node.js и pnpm."
+  },
+  "@deepseek-ai/dsh-tools": {
+    "en": "Tool registry and execution pipeline for the DeepSeek Harness",
+    "ru": "Реестр инструментов и конвейер выполнения для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-typert-loader": {
+    "en": "Loader integration for generated Typert package contributions",
+    "ru": "Интеграция загрузчика для созданных вкладов пакета Typert"
+  },
+  "@deepseek-ai/dsh-typert-protocol": {
+    "en": "Compiler-independent Remote metadata and Typert provider protocols",
+    "ru": "Независимые от компилятора протоколы удаленных метаданных и поставщиков Typert."
+  },
+  "@deepseek-ai/dsh-typert-registry": {
+    "en": "Runtime registry for generated package reflection and Zod schemas",
+    "ru": "Реестр времени выполнения для созданного отражения пакета и схем Zod"
+  },
+  "@deepseek-ai/dsh-user-approval": {
+    "en": "User-approval seam (ctx.approval) for the DeepSeek Harness: one-shot permission decisions dispatched to composed answerers over the approval/request waterfall, fail-closed by default",
+    "ru": "Интерфейс подтверждений пользователя (ctx.approval): одноразовые решения о доступе передаются обработчикам запросов; при ошибке доступ запрещается"
+  },
+  "@deepseek-ai/dsh-user-questions": {
+    "en": "Abstract user-questions seam (ctx.userQuestions) for asking the human during agent runs",
+    "ru": "Абстрактная группа пользовательских вопросов (ctx.userQuestions), позволяющая задавать вопросы человеку во время работы агента."
+  },
+  "@deepseek-ai/dsh-util-code-language": {
+    "en": "Single file-extension to syntax-highlighting language table shared by Client code surfaces and the Host read card",
+    "ru": "Единое расширение файла для языковой таблицы с подсветкой синтаксиса, совместно используемой поверхностями кода клиента и картой чтения хоста."
+  },
+  "@deepseek-ai/dsh-util-crypto": {
+    "en": "Zero-dependency browser-safe UUID and byte-encoding helpers",
+    "ru": "Безопасный для браузера UUID и помощники по байтовому кодированию с нулевой зависимостью."
+  },
+  "@deepseek-ai/dsh-util-time": {
+    "en": "Zero-dependency time vocabulary shared by wire boundaries: canonicalClientTimeZone (IANA zone validation and canonicalization only, no formatting)",
+    "ru": "Словарь времени с нулевой зависимостью, общий для границ проводов: canonicalClientTimeZone (только проверка и канонизация зоны IANA, без форматирования)"
+  },
+  "@deepseek-ai/dsh-util-values": {
+    "en": "Duplicate-install-safe value primitives for the DeepSeek Harness",
+    "ru": "Примитивы значений, защищенные от дублирования и установки, для DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-util-workspace-path": {
+    "en": "Browser-safe Workspace path and display helpers",
+    "ru": "Безопасный для браузера путь к рабочей области и помощники по отображению"
+  },
+  "@deepseek-ai/dsh-web": {
+    "en": "Abstract web access capability seam (ctx.web) for the DeepSeek Harness — search/fetch provider registry, registration-order-independent selection, request/result vocabulary, and the WebError taxonomy",
+    "ru": "Абстрактное соединение возможностей веб-доступа (ctx.web) для DeepSeek Harness — реестр поставщиков поиска и выборки, выбор, независимый от порядка регистрации, словарь запросов/результатов и таксономия WebError"
+  },
+  "@deepseek-ai/dsh-web-app": {
+    "en": "The dsh browser-surface bundle: the web patch layer over dsh-base plus the runtime glue plugin (frontend dist serving, web-surface prompt, bash runtime variables, URL line)",
+    "ru": "Веб-пакет dsh: расширение dsh-base, раздача интерфейса, настройки веб-среды, переменные Bash и адрес запуска"
+  },
+  "@deepseek-ai/dsh-web-fetch-http": {
+    "en": "Anonymous public HTTP(S) fetch provider for the DeepSeek Harness web capability seam (ctx.web)",
+    "ru": "Анонимный общедоступный поставщик HTTP(S)-загрузок для веб-возможностей DeepSeek Harness (ctx.web)"
+  },
+  "@deepseek-ai/dsh-web-frontend": {
+    "en": "Web application entry: vite build over the @deepseek-ai/dsh-client-web shell library; dist/ served by apps/cli's dsh web",
+    "ru": "Запись веб-приложения: сборка vite на основе библиотеки оболочки @deepseek-ai/dsh-client-web; dist/ обслуживается приложениями/cli dsh web"
+  },
+  "@deepseek-ai/dsh-web-search-deepseek": {
+    "en": "DeepSeek-backed search provider (native web_search via the Anthropic-compatible API) for the DeepSeek Harness web capability seam (ctx.web)",
+    "ru": "Поставщик поиска, поддерживаемый DeepSeek (собственный web_search через Anthropic-совместимый API) для шва веб-возможностей DeepSeek Harness (ctx.web)"
+  },
+  "@deepseek-ai/dsh-webhook": {
+    "en": "Fire-and-forget webhook rule runtime that creates Workspace-backed DeepSeek Harness Sessions",
+    "ru": "Среда выполнения правил веб-перехватчика по принципу «выстрелил и забыл», которая создает сеансы DeepSeek Harness с поддержкой Workspace."
+  },
+  "@deepseek-ai/dsh-webhook-github": {
+    "en": "Signed GitHub HTTP webhook adapter for the DeepSeek Harness webhook runtime",
+    "ru": "Подписанный адаптер веб-перехватчика HTTP GitHub для среды выполнения веб-перехватчика DeepSeek Harness"
+  },
+  "@deepseek-ai/dsh-win32-process": {
+    "en": "Shared low-level Win32 process, stdio, and Job Object primitives",
+    "ru": "Общие низкоуровневые процессы Win32, stdio и примитивы объекта задания."
+  },
+  "@deepseek-ai/dsh-workflow": {
+    "en": "Workflow capability seam: ctx.workflowEngine service, run vocabulary, and workflow/* events",
+    "ru": "Возможности рабочего процесса: сервис ctx.workflowEngine, словарь запуска и события рабочего процесса/*."
+  },
+  "@deepseek-ai/dsh-workflow-ptc": {
+    "en": "Workflow orchestration in the shared sandboxed Node PTC runtime",
+    "ru": "Оркестрация рабочих процессов в общей изолированной среде выполнения Node PTC"
+  },
+  "@deepseek-ai/dsh-workspace": {
+    "en": "Workspace entity registry (ctx.workspaceRegistry): durable workspace records with validated session attachment over the domain data form for the DeepSeek Harness",
+    "ru": "Реестр объектов рабочей области (ctx.workspaceRegistry): надежные записи рабочей области с проверенным вложением сеанса в форме данных домена для DeepSeek Harness."
+  },
+  "@deepseek-ai/dsh-workspace-changes": {
+    "en": "Per-turn workspace file changes recorded from git working-tree snapshots and whole-file captures, with per-file comparisons, for the DeepSeek Harness",
+    "ru": "Изменения файлов рабочей области за ход, записанные из снимков рабочего дерева git и захватов всего файла, со сравнением каждого файла для DeepSeek Harness"
+  },
+  "@deepseek-ai/libreoffice-kit": {
+    "en": "Convert, recalculate, and render Office documents with prebuilt LibreOffice",
+    "ru": "Преобразование, перерасчет и визуализация документов Office с помощью встроенного LibreOffice."
+  },
+  "@deepseek-ai/libreoffice-kit-win32-x64": {
+    "en": "Prebuilt LibreOfficeKit engine for win32-x64",
+    "ru": "Готовый движок LibreOfficeKit для Win32-x64."
+  },
+  "@deepseek-ai/node-addon-system": {
+    "en": "Prebuilt system primitives: a Linux Landlock launcher and asynchronous POSIX flock through stable Node-API",
+    "ru": "Готовые системные примитивы: средство запуска Linux Landlock и асинхронный POSIX, загружаемый через стабильный Node-API."
+  },
+  "@deepseek-ai/schemastery": {
+    "en": "Type driven schema validator",
+    "ru": "Валидатор схемы, управляемой типом"
+  },
+  "dsh-ffmpeg": {
+    "en": "DSH 视频处理工具插件：ffmpeg_probe/cut/concat/encode/subtitle/extract/gif 七工具，进程走官方 subprocess 服务，超时树级终止、环境变量路径回退与多视频流探测，零运行时依赖（ffmpeg 本体除外）。",
+    "ru": "Семь инструментов для обработки видео: анализ, обрезка, объединение, кодирование, субтитры, извлечение и GIF. Использует службу subprocess, завершает дерево процессов при тайм-ауте и поддерживает несколько видеопотоков."
+  },
+  "dsh-plugin-git-workflow": {
+    "en": "DeepSeek Harness plugin: first-class Git workflow tools for the model — repo status, diffs, commit creation with validated messages, recent history, and branches. No bare-shell git calls; every invocation runs through the harness shell executor (sandbox + approval semantics) with quoted args, and path/message validation.",
+    "ru": "Инструменты Git для модели: состояние репозитория, различия, создание коммитов с проверкой сообщений, история и ветки. Команды выполняются через оболочку Harness с учётом песочницы и подтверждений."
+  },
+  "@maxwell-feng/dsh-windows-ocr": {
+    "en": "dsh plugin: recognize attached images with the built-in Windows OCR engine (Windows.Media.Ocr) and send only the recognized text to the model. Text models never receive image bytes; vision passthrough is opt-in.",
+    "ru": "Распознаёт текст на прикреплённых изображениях средствами Windows OCR и отправляет модели только распознанный текст. Передача исходного изображения доступна отдельно."
+  },
+  "@deepseek-ai/dsh-plugin-updater": {
+    "en": "Official DeepSeek Harness auto-updater — checks GitHub releases, downloads, applies updates from within the settings UI.",
+    "ru": "Проверяет релизы на GitHub, загружает и устанавливает обновления Harness из раздела настроек."
+  }
+}

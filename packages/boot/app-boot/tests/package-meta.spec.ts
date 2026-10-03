@@ -81,11 +81,12 @@ describe('plugin locale display metadata', () => {
   it('reads direct fields, retains per-field translations, and ignores other locale content', () => {
     dictionary('en', { meta: { title: 'Team', description: 'Work together', ignored: false }, other: { nested: [1] } })
     dictionary('zh', { meta: { title: '团队' } })
+    dictionary('ru', { meta: { title: 'Команда', description: 'Совместная работа' } })
     dictionary('pt-BR', { meta: { description: 'Trabalhar juntos' } })
     file(join(dir, 'locale', 'ignored.txt'), 'not JSON')
     expect(readPluginMeta('localized', parentURL)).toEqual({
-      title: { en: 'Team', zh: '团队' },
-      description: { en: 'Work together', 'pt-br': 'Trabalhar juntos' },
+      title: { en: 'Team', zh: '团队', ru: 'Команда' },
+      description: { en: 'Work together', 'pt-br': 'Trabalhar juntos', ru: 'Совместная работа' },
     })
   })
 
@@ -108,6 +109,20 @@ describe('plugin locale display metadata', () => {
   it('falls back to package fields when locale resources are absent', () => {
     manifest({ '.': './index.js', './package.json': './package.json' }, { description: 'Package introduction' })
     expect(readPluginMeta('localized', parentURL)).toEqual({ title: 'localized', description: 'Package introduction' })
+  })
+
+  it('adds a Russian package description only for an unchanged English source', () => {
+    manifest({ './package.json': './package.json' }, {
+      name: '@deepseek-ai/cordis', description: 'Meta-Framework for Modern JavaScript Applications',
+    })
+    expect(readPluginMeta('localized', parentURL)?.description).toEqual({
+      en: 'Meta-Framework for Modern JavaScript Applications',
+      ru: 'Метафреймворк для современных приложений JavaScript',
+    })
+    manifest({ './package.json': './package.json' }, {
+      name: '@deepseek-ai/cordis', description: 'A changed description',
+    })
+    expect(readPluginMeta('localized', parentURL)?.description).toBe('A changed description')
   })
 
   it('falls back per field without replacing available locale translations', () => {

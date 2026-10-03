@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Управление браузером (Chrome DevTools)",
+    "description": "Позволяет модели просматривать страницы и работать с ними через Chrome DevTools MCP в запущенном Chrome."
+  }
+}

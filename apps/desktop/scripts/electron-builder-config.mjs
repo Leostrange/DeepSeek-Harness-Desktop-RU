@@ -242,7 +242,7 @@ export function createElectronBuilderConfig(
       perMachine: false,
       allowElevation: false,
       allowToChangeInstallationDirectory: false,
-      installerLanguages: ['en_US', 'zh_CN'],
+      installerLanguages: ['en_US', 'zh_CN', 'ru_RU'],
       differentialPackage: true,
     },
     detectUpdateChannel: false,
